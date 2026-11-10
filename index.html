@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOHAMED KAREEM GAMES — Personal Gaming Platform</title>
+  <meta name="description" content="Mohamed Kareem's personal gaming platform showcasing Chess, Zombie Survival, and Space Invaders built with Python and Pygame. Play online or download for Windows PC.">
+  <link rel="icon" type="image/svg+xml" href="static/assets/logos/logo.svg">
+  <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+
+  <!-- Ambient Animated Background Particles & Glows -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="radial-glow-top"></div>
+  <div class="radial-glow-bottom"></div>
+
+  <!-- Main Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="brand-link" aria-label="Mohamed Kareem Games Home">
+          <img src="static/assets/logos/logo.svg" alt="Mohamed Kareem Games Logo" class="brand-logo-img">
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-item active">Home</a></li>
+          <li><a href="#games-section" class="nav-item">Game Library</a></li>
+          <li><a href="library.html" class="nav-item">My Collection</a></li>
+          <li><a href="#about-section" class="nav-item">About Developer</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search games, genre..." autocomplete="off">
+          </div>
+          <a href="library.html" class="btn btn-outline btn-sm">⭐ Favorites (<span id="fav-count">0</span>)</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Banner & Welcome Showcase -->
+  <main>
+    <section class="hero-section">
+      <div class="hero-grid">
+        <div class="hero-text-col">
+          <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            <span>OFFICIAL INDEPENDENT PLATFORM</span>
+          </div>
+
+          <h1 class="hero-title">
+            PLAY. CONQUER. <br>
+            <span class="text-gradient">MOHAMED KAREEM</span> GAMES.
+          </h1>
+
+          <p class="hero-desc">
+            Welcome to my personal gaming universe. Experience authentic games developed with 
+            <strong>Python, Pygame, VS Code, and Google Antigravity</strong>. Challenge multi-level Minimax AI in Chess, 
+            slay undead hordes in Zombie Survival, or defend the galaxy in Space Invaders.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#games-section" class="btn btn-primary">⚡ Explore Games</a>
+            <a href="library.html" class="btn btn-outline">🎮 My Saved Games</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>3</h3>
+              <p>Original Games</p>
+            </div>
+            <div class="stat-item">
+              <h3>100%</h3>
+              <p>Python Engine Parity</p>
+            </div>
+            <div class="stat-item">
+              <h3>Windows PC</h3>
+              <p>Downloadable Executables</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Spotlight: Featured Game -->
+        <div class="hero-spotlight-col">
+          <div class="hero-spotlight">
+            <div class="spotlight-banner-wrapper">
+              <img src="static/assets/thumbnails/space_thumb.svg" alt="Space Invasion Invaders" class="spotlight-img">
+              <span class="spotlight-tag">★ FEATURED TITLE</span>
+            </div>
+            <div class="spotlight-content">
+              <div class="spotlight-meta">
+                <span class="spotlight-category">Arcade / Sci-Fi</span>
+                <span class="spotlight-rating">★★★★★ 5.0</span>
+              </div>
+              <h2 class="spotlight-title">SPACE INVASION INVADERS</h2>
+              <p class="spotlight-desc">
+                High-octane retro pixel shooter featuring 4-tier green laser evolution, 50-round recharging ammo magazine, procedural 8-bit sound, and 7 hardcore difficulty modes.
+              </p>
+              <div class="spotlight-actions">
+                <a href="games/space-invaders.html" class="btn btn-primary btn-sm">▶ Play in Browser</a>
+                <a href="builds/SpaceInvasionInvaders-v1.0.exe" class="btn btn-download btn-sm" download>⭳ Download .EXE</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Game Library Section with Filters -->
+    <section class="section-wrapper" id="games-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">GAME LIBRARY</h2>
+          <p class="section-subtitle">Play instantly in your browser or download the native Windows PC version</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="category-filter">
+          <button class="filter-btn active" data-category="All">All Games</button>
+          <button class="filter-btn" data-category="Strategy">Strategy</button>
+          <button class="filter-btn" data-category="Survival">Survival</button>
+          <button class="filter-btn" data-category="Arcade">Arcade</button>
+        </div>
+      </div>
+
+      <!-- Games Grid (Rendered dynamically from games-registry.js) -->
+      <div class="games-grid" id="games-container">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+    <!-- Platform Highlights Section -->
+    <section class="section-wrapper" style="padding-top: 1rem;">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">PLATFORM FEATURES</h2>
+          <p class="section-subtitle">Engineered for authentic performance, progress tracking, and standalone play</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.75rem;">
+          <div style="font-size: 2.2rem; margin-bottom: 0.75rem;">💾</div>
+          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--neon-cyan);">Browser Save & Resume</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Save your Chess board positions, undo moves, record Space Invaders high scores, and track your highest Zombie Survival waves directly via browser storage.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.75rem;">
+          <div style="font-size: 2.2rem; margin-bottom: 0.75rem;">💻</div>
+          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--neon-green);">Direct Windows PC Downloads</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Every single game comes bundled as a genuine standalone 64-bit Windows executable (`.exe`). Zero Python installation required for PC players!
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-md); padding: 1.75rem;">
+          <div style="font-size: 2.2rem; margin-bottom: 0.75rem;">⚡</div>
+          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--neon-pink);">Future Expansion Ready</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Built with a centralized catalog configuration. Adding new Python and Pygame games in the future requires zero website rebuilding.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Mohamed Kareem Section -->
+    <section class="section-wrapper" id="about-section">
+      <div class="about-card">
+        <div class="about-avatar-wrapper">
+          <div class="avatar-hex">
+            <div class="avatar-inner">
+              <span class="avatar-initials">MK</span>
+            </div>
+          </div>
+          <span class="dev-badge">CREATOR & DEVELOPER</span>
+        </div>
+
+        <div class="about-content">
+          <h2 class="brand-font">MOHAMED KAREEM</h2>
+          <p class="about-role">Independent Game Developer & Software Creator</p>
+          <p class="about-text">
+            Hello! I am Mohamed Kareem. I develop original, engaging video games with <strong>Python, Pygame, VS Code, and Google Antigravity</strong>. 
+            This gaming platform is my personal headquarters where I publish, preserve, and distribute everything I create.
+          </p>
+          <p class="about-text">
+            Whether it's crafting tactical chess algorithms with alpha-beta pruning, engineering 360-degree top-down survival mechanics with procedural waves, or building retro-arcade space shooters with synthesized 8-bit soundscapes, I believe in creating genuine gameplay experiences with clean, robust code.
+          </p>
+
+          <div class="tech-stack-list">
+            <span class="tech-tag">🐍 Python 3</span>
+            <span class="tech-tag">🎮 Pygame</span>
+            <span class="tech-tag">⚡ Pygbag / WebAssembly</span>
+            <span class="tech-tag">📦 PyInstaller (.EXE)</span>
+            <span class="tech-tag">💻 VS Code</span>
+            <span class="tech-tag">🚀 Google Antigravity</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="static/assets/logos/logo.svg" alt="Mohamed Kareem Games" style="height: 42px;">
+        <p>The official personal gaming platform of Mohamed Kareem. Play directly in modern web browsers or download standalone Windows PC executables.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Game Library</h4>
+        <ul>
+          <li><a href="games/chess.html">Python Chess: Local Arena</a></li>
+          <li><a href="games/zombie.html">NIGHTFALL: Zombie Survival</a></li>
+          <li><a href="games/space-invaders.html">SPACE INVASION INVADERS</a></li>
+          <li><a href="library.html">My Saved Games & Records</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>PC Downloads</h4>
+        <ul>
+          <li><a href="builds/MohamedKareemChess-v1.0.exe" download>Chess Arena (Windows .EXE)</a></li>
+          <li><a href="builds/NightfallZombieSurvival-v1.0.exe" download>Zombie Survival (Windows .EXE)</a></li>
+          <li><a href="builds/SpaceInvasionInvaders-v1.0.exe" download>Space Invaders (Windows .EXE)</a></li>
+          <li><a href="about.html">About Developer & Setup</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Mohamed Kareem Games. All rights reserved.</p>
+      <p>Developed with Python, Pygame, VS Code, and Google Antigravity.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="static/js/games-registry.js"></script>
+  <script src="static/js/storage.js"></script>
+  <script src="static/js/app.js"></script>
+</body>
+</html>

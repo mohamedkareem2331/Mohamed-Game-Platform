@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Mohamed Kareem — Independent Game Developer</title>
+  <meta name="description" content="Discover the story and technical vision of Mohamed Kareem, independent game developer building Python, Pygame, and WebAssembly games.">
+  <link rel="icon" type="image/svg+xml" href="static/assets/logos/logo.svg">
+  <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+
+  <!-- Ambient Animated Background Particles -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="radial-glow-top"></div>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="brand-link" aria-label="Mohamed Kareem Games Home">
+          <img src="static/assets/logos/logo.svg" alt="Mohamed Kareem Games Logo" class="brand-logo-img">
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-item">Home</a></li>
+          <li><a href="index.html#games-section" class="nav-item">Game Library</a></li>
+          <li><a href="library.html" class="nav-item">My Collection</a></li>
+          <li><a href="about.html" class="nav-item active">About Developer</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="index.html" class="btn btn-primary btn-sm">⚡ Play Games</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section-wrapper" style="padding-top: 4rem;">
+    <div class="about-card" style="margin-bottom: 3rem;">
+      <div class="about-avatar-wrapper">
+        <div class="avatar-hex">
+          <div class="avatar-inner">
+            <span class="avatar-initials">MK</span>
+          </div>
+        </div>
+        <span class="dev-badge">INDEPENDENT CREATOR</span>
+      </div>
+
+      <div class="about-content">
+        <h1 class="brand-font" style="font-size: 2.8rem; margin-bottom: 0.35rem;">MOHAMED KAREEM</h1>
+        <p class="about-role">Game Developer • Software Architect • Python Specialist</p>
+        <p class="about-text">
+          Welcome to my official gaming platform. I design, code, and package original video games engineered in <strong>Python, Pygame, VS Code, and Google Antigravity</strong>. 
+          My mission with <strong>MOHAMED KAREEM GAMES</strong> is to provide players with a clean, high-performance arcade and strategy hub where every game can be experienced in-browser or downloaded as a standalone Windows PC executable.
+        </p>
+
+        <div class="tech-stack-list" style="margin-top: 1.5rem;">
+          <span class="tech-tag">🐍 Python 3</span>
+          <span class="tech-tag">🎮 Pygame 2.6</span>
+          <span class="tech-tag">⚡ Pygbag & WebAssembly</span>
+          <span class="tech-tag">📦 PyInstaller (.EXE)</span>
+          <span class="tech-tag">💻 Visual Studio Code</span>
+          <span class="tech-tag">🚀 Google Antigravity</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Development Philosophy & PC Guide -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 2rem;">
+        <h3 style="color: var(--neon-cyan); margin-bottom: 1rem; font-size: 1.4rem;">🎯 Game Development Pillars</h3>
+        <ul style="color: var(--text-muted); list-style: none; display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem;">
+          <li><strong style="color: #fff;">1. Genuine Python Logic:</strong> Every game runs on genuine algorithms, from multi-depth Minimax decision trees in Chess to real-time 360-degree vectors in Zombie Survival.</li>
+          <li><strong style="color: #fff;">2. Zero Cloud Friction:</strong> No mandatory sign-ups, subscriptions, or DRM. All progress is saved client-side with full player sovereignty.</li>
+          <li><strong style="color: #fff;">3. Dual Platform Freedom:</strong> Instant zero-install play in modern Chrome, Firefox, or Edge, paired with standalone Windows desktop builds.</li>
+        </ul>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 2rem;">
+        <h3 style="color: var(--neon-green); margin-bottom: 1rem; font-size: 1.4rem;">💻 Windows PC Installation Guide</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.6;">
+          All downloadable games in the builds section are packaged using <strong>PyInstaller</strong> into self-contained 64-bit Windows executables:
+        </p>
+        <ol style="color: var(--text-muted); padding-left: 1.25rem; font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.6rem;">
+          <li>Click the <strong style="color: var(--neon-green);">Download PC</strong> button on any game page or library card.</li>
+          <li>Save the `.exe` file to your preferred folder (e.g., Desktop or Games).</li>
+          <li>Double-click the executable to launch immediately. No Python or runtime installation needed!</li>
+          <li>If Windows SmartScreen appears on first run, click <em>More info</em> &rarr; <em>Run anyway</em>.</li>
+        </ol>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="margin-top: 5rem;">
+    <div class="footer-bottom" style="border: none; padding: 0;">
+      <p>&copy; 2026 Mohamed Kareem Games. All rights reserved.</p>
+      <p>Developed with Python, Pygame, VS Code, and Google Antigravity.</p>
+    </div>
+  </footer>
+
+  <script src="static/js/games-registry.js"></script>
+  <script src="static/js/storage.js"></script>
+  <script src="static/js/app.js"></script>
+</body>
+</html>

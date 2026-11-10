@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Chess: Local Arena — MOHAMED KAREEM GAMES</title>
+  <meta name="description" content="Play tournament-grade local Python Chess by Mohamed Kareem in your browser or download for Windows PC. Features Minimax AI, 4 difficulties, 7 themes, and save/resume.">
+  <link rel="icon" type="image/svg+xml" href="../static/assets/logos/logo.svg">
+  <link rel="stylesheet" href="../static/css/main.css">
+  <link rel="stylesheet" href="../static/css/games.css">
+  <style>
+    /* Chess-specific Board Arena Styles */
+    .chess-arena-shell {
+      display: flex;
+      flex-direction: row;
+      background: #12100d;
+      border: 1px solid rgba(217, 184, 117, 0.25);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      width: 100%;
+      max-width: 1100px;
+      margin: 1rem auto;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
+    }
+
+    .chess-board-col {
+      padding: 1.5rem;
+      background: #0d0c0b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .chess-board {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      width: 520px;
+      height: 520px;
+      border: 6px solid #2a241b;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+      user-select: none;
+    }
+
+    .chess-square {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.7rem;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.15s ease;
+    }
+
+    .chess-square.selected {
+      background-color: #f7ec6e !important;
+    }
+
+    .chess-square.destination {
+      background-color: #cddc78 !important;
+    }
+
+    .chess-square.destination::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .chess-square.check-square {
+      background-color: #e57373 !important;
+    }
+
+    .chess-side-panel {
+      width: 320px;
+      background: #1b1916;
+      border-left: 1px solid rgba(217, 184, 117, 0.15);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .chess-status-badge {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #f4f1ea;
+      font-family: 'Rajdhani', sans-serif;
+      padding: 0.6rem 0.85rem;
+      background: #25221e;
+      border-left: 3px solid #d9b875;
+      border-radius: 4px;
+    }
+
+    .captured-pieces-bar {
+      font-size: 1.35rem;
+      color: #aaa39a;
+      letter-spacing: 2px;
+      min-height: 28px;
+    }
+
+    .moves-history-box {
+      background: #141311;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      height: 140px;
+      overflow-y: auto;
+      padding: 0.5rem;
+      font-family: 'Consolas', monospace;
+      font-size: 0.88rem;
+      color: #d9b875;
+    }
+
+    .moves-history-box div {
+      padding: 0.15rem 0.3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .control-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .control-row label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #d9b875;
+      text-transform: uppercase;
+    }
+
+    .chess-select {
+      background: #282521;
+      border: 1px solid rgba(217, 184, 117, 0.3);
+      color: #fff;
+      padding: 0.45rem 0.75rem;
+      border-radius: 4px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .chess-arena-shell {
+        flex-direction: column;
+      }
+      .chess-side-panel {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid rgba(217, 184, 117, 0.15);
+      }
+      .chess-board {
+        width: 90vw;
+        height: 90vw;
+        max-width: 440px;
+        max-height: 440px;
+      }
+      .chess-square {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Animated Background Particles -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="radial-glow-top"></div>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="../index.html" class="brand-link" aria-label="Mohamed Kareem Games Home">
+          <img src="../static/assets/logos/logo.svg" alt="Mohamed Kareem Games Logo" class="brand-logo-img">
+        </a>
+        <ul class="nav-links">
+          <li><a href="../index.html" class="nav-item">Home</a></li>
+          <li><a href="../index.html#games-section" class="nav-item">Game Library</a></li>
+          <li><a href="../library.html" class="nav-item">My Collection</a></li>
+          <li><a href="../about.html" class="nav-item">About Developer</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="../builds/MohamedKareemChess-v1.0.exe" class="btn btn-download btn-sm" download>⭳ Download Windows .EXE</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="game-page-wrapper">
+    <!-- Top Breadcrumb & Actions -->
+    <div class="game-top-bar">
+      <div class="game-breadcrumb">
+        <a href="../index.html">Platform</a>
+        <span>/</span>
+        <a href="../index.html#games-section">Library</a>
+        <span>/</span>
+        <span style="color: #fff;">Python Chess: Local Arena</span>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button class="cabinet-btn" onclick="toggleGameFav(event, 'chess')">★ Favorite</button>
+        <a href="../builds/MohamedKareemChess-v1.0.exe" class="btn btn-download btn-sm" download>⭳ Download for Windows PC (10.4 MB)</a>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="game-toast" class="game-overlay-toast">Game Saved Successfully!</div>
+
+    <!-- Cabinet Playable Area -->
+    <section class="arcade-cabinet" id="cabinet-shell">
+      <div class="cabinet-hud-header">
+        <div class="cabinet-title-group">
+          <span style="font-size: 1.4rem;">♞</span>
+          <h2 class="cabinet-game-title">PYTHON CHESS: LOCAL ARENA</h2>
+          <span class="hero-badge" style="margin: 0; padding: 0.15rem 0.6rem; font-size: 0.75rem;">GENUINE MINIMAX ENGINE</span>
+        </div>
+
+        <div class="cabinet-controls-bar">
+          <button class="cabinet-btn" onclick="triggerNewGame()">🔄 New Game</button>
+          <button class="cabinet-btn" onclick="triggerUndo()">↩ Undo</button>
+          <button class="cabinet-btn save-btn" onclick="triggerSave()">💾 Save Game</button>
+          <button class="cabinet-btn" id="resume-btn" onclick="triggerResume()">📂 Resume Save</button>
+          <button class="cabinet-btn" onclick="toggleFullscreenCabinet()">⛶ Fullscreen</button>
+        </div>
+      </div>
+
+      <!-- Chess Arena Container -->
+      <div class="cabinet-screen-area" style="padding: 1.5rem 0;">
+        <div class="chess-arena-shell">
+          <!-- Chess Board Grid -->
+          <div class="chess-board-col">
+            <div id="chess-board" class="chess-board"></div>
+            <div style="color: #888075; font-size: 0.8rem; margin-top: 0.75rem; letter-spacing: 0.08em; font-weight: 700;">
+              SELECT PIECE → CHOOSE HIGHLIGHTED DESTINATION
+            </div>
+          </div>
+
+          <!-- Chess Side Controls Panel -->
+          <div class="chess-side-panel">
+            <div class="control-row">
+              <label>Game Status</label>
+              <div id="chess-status" class="chess-status-badge">White to move</div>
+            </div>
+
+            <div class="control-row">
+              <label>Play Mode</label>
+              <select id="chess-mode" class="chess-select" onchange="changeMode()">
+                <option value="2 Players">2 Players (Local)</option>
+                <option value="Play vs AI" selected>Play vs AI</option>
+              </select>
+            </div>
+
+            <div class="control-row" id="ai-level-row">
+              <label>AI Difficulty</label>
+              <select id="chess-ai-level" class="chess-select" onchange="changeAILevel()">
+                <option value="Easy">Easy (Casual)</option>
+                <option value="Medium" selected>Medium (Depth 1)</option>
+                <option value="Hard">Hard (Depth 2)</option>
+                <option value="Extreme">Extreme (Depth 3 Alpha-Beta)</option>
+              </select>
+            </div>
+
+            <div class="control-row">
+              <label>Board Theme</label>
+              <select id="chess-theme" class="chess-select" onchange="changeTheme()">
+                <option value="Classic" selected>Classic Wood</option>
+                <option value="Ocean">Ocean Blue</option>
+                <option value="Forest">Forest Green</option>
+                <option value="Rose">Rose Pink</option>
+                <option value="Midnight">Midnight Navy</option>
+                <option value="Amethyst">Amethyst Purple</option>
+                <option value="Sunset">Sunset Amber</option>
+              </select>
+            </div>
+
+            <div class="control-row">
+              <label>Captured Pieces</label>
+              <div id="captured-display" class="captured-pieces-bar">Captured: —</div>
+            </div>
+
+            <div class="control-row" style="flex-grow: 1;">
+              <label>Move History</label>
+              <div id="move-history" class="moves-history-box"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details & Guide Grid -->
+    <div class="game-details-grid">
+      <div class="game-card-panel">
+        <h3>📖 Game Overview & Technical Mechanics</h3>
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem;">
+          Created by <strong>Mohamed Kareem</strong> using Python and Tkinter for the desktop client, this browser edition runs the 
+          exact legal move calculation engine, castling rights logic, en passant handling, and multi-depth Minimax algorithm.
+        </p>
+
+        <ul class="feature-check-list">
+          <li><strong>Tournament Legal Move Generation:</strong> Validates pin checks, king attack paths, and promotion options.</li>
+          <li><strong>Minimax AI Engine:</strong> Uses Alpha-Beta pruning with material piece valuations (Queen: 900, Rook: 500, Bishop: 330, Knight: 320, Pawn: 100).</li>
+          <li><strong>Save and Resume:</strong> Persists complete 8x8 piece matrices, active turn, castling permissions, en-passant squares, and move histories directly to LocalStorage.</li>
+          <li><strong>7 Authentic Board Themes:</strong> Matches every color palette designed in Mohamed Kareem's original project.</li>
+        </ul>
+      </div>
+
+      <div class="game-card-panel">
+        <h3>🎮 Controls & Hotkeys</h3>
+        <table class="key-bindings-table">
+          <tr>
+            <td><span class="key-tag">Left Click</span></td>
+            <td>Select piece & preview legal destinations</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">F11</span></td>
+            <td>Toggle fullscreen arcade view</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">ESC</span></td>
+            <td>Exit fullscreen mode</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Undo</span></td>
+            <td>Revert last move (re-syncs AI turn)</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Save Game</span></td>
+            <td>Store ongoing match to browser memory</td>
+          </tr>
+        </table>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+          <a href="../builds/MohamedKareemChess-v1.0.exe" class="btn btn-download" style="width: 100%;" download>
+            ⭳ Download Windows .EXE (10.4 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="border: none; padding: 0;">
+      <p>&copy; 2026 Mohamed Kareem Games. All rights reserved.</p>
+      <p>Original project: <code>chess_game.py</code> | Package: <code>MohamedKareemChess.exe</code></p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../static/js/games-registry.js"></script>
+  <script src="../static/js/storage.js"></script>
+  <script src="../static/js/games/chess-engine.js"></script>
+  <script>
+    let game = new ChessGame();
+    let selectedSquare = null;
+    let availableMoves = [];
+    let currentTheme = "Classic";
+    let currentMode = "Play vs AI";
+    let currentAILevel = "Medium";
+    let isAiThinking = false;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Record game launch in recently played
+      if (window.mkStorage) {
+        window.mkStorage.recordPlayed("chess");
+      }
+
+      // Check if resume requested via URL query ?resume=1
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("resume") === "1") {
+        triggerResume();
+      }
+
+      renderBoard();
+      updateStatus();
+    });
+
+    function renderBoard() {
+      const boardEl = document.getElementById("chess-board");
+      boardEl.innerHTML = "";
+      const [lightColor, darkColor] = BOARD_THEMES[currentTheme] || BOARD_THEMES["Classic"];
+
+      const checkedKing = game.in_check(game.turn) ? game.find_king(game.turn) : null;
+      const destinations = new Set(availableMoves.map(m => `${m.end[0]},${m.end[1]}`));
+
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          const sq = document.createElement("div");
+          sq.className = "chess-square";
+          const isLight = (r + c) % 2 === 0;
+          sq.style.backgroundColor = isLight ? lightColor : darkColor;
+
+          if (selectedSquare && selectedSquare[0] === r && selectedSquare[1] === c) {
+            sq.classList.add("selected");
+          }
+          if (destinations.has(`${r},${c}`)) {
+            sq.classList.add("destination");
+          }
+          if (checkedKing && checkedKing[0] === r && checkedKing[1] === c) {
+            sq.classList.add("check-square");
+          }
+
+          const piece = game.board[r][c];
+          if (piece) {
+            sq.textContent = SYMBOLS[piece] || "";
+            // Contrast styling for black vs white piece symbols
+            if (piece[0] === "b") {
+              sq.style.color = "#161616";
+              sq.style.textShadow = "0 0 2px rgba(255, 255, 255, 0.4)";
+            } else {
+              sq.style.color = isLight ? "#6b472b" : "#fffdf7";
+              sq.style.textShadow = "0 1px 3px rgba(0, 0, 0, 0.6)";
+            }
+          }
+
+          sq.addEventListener("click", () => handleSquareClick(r, c));
+          boardEl.appendChild(sq);
+        }
+      }
+    }
+
+    function handleSquareClick(r, c) {
+      if (game.game_over || isAiThinking) return;
+      if (currentMode === "Play vs AI" && game.turn === "b") return;
+
+      if (selectedSquare) {
+        const chosen = availableMoves.find(m => m.end[0] === r && m.end[1] === c);
+        if (chosen) {
+          if (chosen.promotion) {
+            chosen.promotion = prompt("Promote Pawn to: Q (Queen), R (Rook), B (Bishop), N (Knight)", "Q")?.toUpperCase() || "Q";
+            if (!"QRBN".includes(chosen.promotion)) chosen.promotion = "Q";
+          }
+          game.apply(chosen);
+          selectedSquare = null;
+          availableMoves = [];
+          renderBoard();
+          updateStatus();
+          scheduleAIMove();
+          return;
+        }
+      }
+
+      const piece = game.board[r][c];
+      if (piece && piece[0] === game.turn) {
+        selectedSquare = [r, c];
+        availableMoves = game.legal_moves([r, c]);
+      } else {
+        selectedSquare = null;
+        availableMoves = [];
+      }
+      renderBoard();
+    }
+
+    function scheduleAIMove() {
+      if (currentMode === "Play vs AI" && game.turn === "b" && !game.game_over) {
+        isAiThinking = true;
+        document.getElementById("chess-status").textContent = "AI is thinking...";
+        setTimeout(() => {
+          const aiMove = game.choose_ai_move(currentAILevel);
+          if (aiMove) {
+            game.apply(aiMove);
+          }
+          isAiThinking = false;
+          renderBoard();
+          updateStatus();
+        }, 320);
+      }
+    }
+
+    function updateStatus() {
+      document.getElementById("chess-status").textContent = game.status();
+
+      // Render captured pieces
+      const remaining = { P: 8, N: 2, B: 2, R: 2, Q: 1, K: 1 };
+      const currentPieces = { w: {}, b: {} };
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          const p = game.board[r][c];
+          if (p) currentPieces[p[0]][p[1]] = (currentPieces[p[0]][p[1]] || 0) + 1;
+        }
+      }
+
+      let capturedW = "";
+      let capturedB = "";
+      for (const [kind, total] of Object.entries(remaining)) {
+        const lostW = total - (currentPieces.w[kind] || 0);
+        const lostB = total - (currentPieces.b[kind] || 0);
+        if (lostW > 0) capturedW += SYMBOLS["w" + kind].repeat(lostW) + " ";
+        if (lostB > 0) capturedB += SYMBOLS["b" + kind].repeat(lostB) + " ";
+      }
+      document.getElementById("captured-display").textContent = `Captured: ${capturedW || '—'} | ${capturedB || '—'}`;
+
+      // Render move history
+      const histBox = document.getElementById("move-history");
+      histBox.innerHTML = "";
+      for (let i = 0; i < game.move_text.length; i += 2) {
+        const white = game.move_text[i];
+        const black = game.move_text[i + 1] || "";
+        const div = document.createElement("div");
+        div.textContent = `${Math.floor(i / 2) + 1}. ${white}  ${black}`;
+        histBox.appendChild(div);
+      }
+      histBox.scrollTop = histBox.scrollHeight;
+    }
+
+    function triggerNewGame() {
+      if (confirm("Start a new Chess game?")) {
+        game.reset();
+        selectedSquare = null;
+        availableMoves = [];
+        renderBoard();
+        updateStatus();
+        showToast("New Game Started");
+      }
+    }
+
+    function triggerUndo() {
+      let undone = game.undo();
+      if (undone && currentMode === "Play vs AI" && game.turn === "b") {
+        undone = game.undo(); // Undo AI response too
+      }
+      if (undone) {
+        selectedSquare = null;
+        availableMoves = [];
+        renderBoard();
+        updateStatus();
+        showToast("Move Undone");
+      }
+    }
+
+    function triggerSave() {
+      const state = {
+        board: game.board,
+        turn: game.turn,
+        castling: game.castling,
+        en_passant: game.en_passant,
+        move_text: game.move_text,
+        theme: currentTheme,
+        mode: currentMode,
+        aiLevel: currentAILevel
+      };
+      if (window.mkStorage && window.mkStorage.saveChessState(state)) {
+        showToast("Chess Match Saved Locally!");
+      }
+    }
+
+    function triggerResume() {
+      if (!window.mkStorage) return;
+      const save = window.mkStorage.getChessSave();
+      if (!save) {
+        showToast("No Saved Match Found");
+        return;
+      }
+      game.board = save.board.map(r => [...r]);
+      game.turn = save.turn;
+      game.castling = { ...save.castling };
+      game.en_passant = save.en_passant ? [...save.en_passant] : null;
+      game.move_text = [...(save.move_text || [])];
+      game.history = [];
+      game.game_over = false;
+
+      if (save.theme) {
+        currentTheme = save.theme;
+        document.getElementById("chess-theme").value = currentTheme;
+      }
+      if (save.mode) {
+        currentMode = save.mode;
+        document.getElementById("chess-mode").value = currentMode;
+      }
+      if (save.aiLevel) {
+        currentAILevel = save.aiLevel;
+        document.getElementById("chess-ai-level").value = currentAILevel;
+      }
+
+      selectedSquare = null;
+      availableMoves = [];
+      renderBoard();
+      updateStatus();
+      showToast("Match Successfully Resumed!");
+    }
+
+    function changeMode() {
+      currentMode = document.getElementById("chess-mode").value;
+      triggerNewGame();
+    }
+
+    function changeAILevel() {
+      currentAILevel = document.getElementById("chess-ai-level").value;
+      showToast(`AI Difficulty: ${currentAILevel}`);
+    }
+
+    function changeTheme() {
+      currentTheme = document.getElementById("chess-theme").value;
+      renderBoard();
+    }
+
+    function toggleFullscreenCabinet() {
+      const cabinet = document.getElementById("cabinet-shell");
+      if (!document.fullscreenElement) {
+        cabinet.requestFullscreen().catch(err => alert("Fullscreen error: " + err.message));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("game-toast");
+      toast.textContent = msg;
+      toast.classList.add("visible");
+      setTimeout(() => toast.classList.remove("visible"), 2500);
+    }
+  </script>
+</body>
+</html>

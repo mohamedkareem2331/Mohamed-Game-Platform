@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="zBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a050d"/>
+      <stop offset="45%" stop-color="#120c1a"/>
+      <stop offset="100%" stop-color="#240714"/>
+    </linearGradient>
+    <linearGradient id="toxicGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5aff8a"/>
+      <stop offset="60%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="bloodRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3366"/>
+      <stop offset="60%" stop-color="#e11d48"/>
+      <stop offset="100%" stop-color="#881337"/>
+    </linearGradient>
+    <filter id="zGlow">
+      <feGaussianBlur stdDeviation="7" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Dark Atmospheric Background -->
+  <rect width="800" height="500" fill="url(#zBgGrad)"/>
+
+  <!-- Blood Moon -->
+  <circle cx="400" cy="190" r="130" fill="url(#bloodRed)" opacity="0.25" filter="url(#zGlow)"/>
+  <circle cx="400" cy="190" r="105" fill="#150a1b" stroke="#e11d48" stroke-width="2" opacity="0.8"/>
+
+  <!-- Cyber Crosshair HUD -->
+  <g transform="translate(400, 190)">
+    <circle cx="0" cy="0" r="85" fill="none" stroke="#5aff8a" stroke-width="2" stroke-dasharray="14 10" opacity="0.7"/>
+    <line x1="-120" y1="0" x2="-40" y2="0" stroke="#5aff8a" stroke-width="2.5"/>
+    <line x1="40" y1="0" x2="120" y2="0" stroke="#5aff8a" stroke-width="2.5"/>
+    <line x1="0" y1="-120" x2="0" y2="-40" stroke="#5aff8a" stroke-width="2.5"/>
+    <line x1="0" y1="40" x2="0" y2="120" stroke="#5aff8a" stroke-width="2.5"/>
+    <circle cx="0" cy="0" r="6" fill="#ff3366"/>
+  </g>
+
+  <!-- Zombie Horde Silhouette & Skull -->
+  <g transform="translate(400, 200)" filter="url(#zGlow)">
+    <!-- Skull Base -->
+    <path d="M-45,-25 C-45,-60 45,-60 45,-25 C45,10 32,35 24,45 L-24,45 C-32,35 -45,10 -45,-25 Z" fill="#0d141e" stroke="#5aff8a" stroke-width="3"/>
+    <!-- Glowing Toxic Eyes -->
+    <polygon points="-24,-15 -12,-20 -15,-5 -22,-8" fill="#5aff8a"/>
+    <polygon points="24,-15 12,-20 15,-5 22,-8" fill="#5aff8a"/>
+    <!-- Teeth -->
+    <path d="M-16,35 L-16,45 M-8,35 L-8,45 M0,35 L0,45 M8,35 L8,45 M16,35 L16,45" stroke="#5aff8a" stroke-width="2.5"/>
+  </g>
+
+  <!-- Floating Tags -->
+  <rect x="50" y="45" width="140" height="32" rx="16" fill="#1b0e1e" stroke="#e11d48" stroke-width="1.5"/>
+  <text x="120" y="66" fill="#ff708f" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">SURVIVAL</text>
+
+  <rect x="610" y="45" width="140" height="32" rx="16" fill="#091b15" stroke="#10b981" stroke-width="1.5"/>
+  <text x="680" y="66" fill="#5aff8a" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">ARCADE 360°</text>
+
+  <!-- Typography -->
+  <text x="400" y="380" fill="#ffffff" font-family="'Orbitron', 'Segoe UI', sans-serif" font-size="34" font-weight="900" text-anchor="middle" letter-spacing="3">
+    NIGHTFALL: ZOMBIE SURVIVAL
+  </text>
+  <text x="400" y="415" fill="#5aff8a" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="600" text-anchor="middle" letter-spacing="2">
+    WAVE ESCALATION • BOSS FIGHTS • UPGRADES
+  </text>
+  <text x="400" y="445" fill="#9ba3af" font-family="'Segoe UI', sans-serif" font-size="13" text-anchor="middle">
+    WASD Movement • Mouse Aim • Dash Ability • High Scores
+  </text>
+</svg>

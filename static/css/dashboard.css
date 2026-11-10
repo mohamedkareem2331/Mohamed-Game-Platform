@@ -1,0 +1,112 @@
+/* MOHAMED KAREEM GAMES - DASHBOARD STYLES */
+
+.dashboard-header {
+  padding: 3rem 2rem 1.5rem 2rem;
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+.dashboard-tabs {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.dash-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dash-tab-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dash-tab-btn.active {
+  color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.storage-notice-box {
+  background: rgba(16, 21, 38, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-left: 4px solid var(--neon-cyan);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.storage-notice-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.storage-notice-text strong {
+  color: #fff;
+}
+
+.saved-game-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+  transition: var(--transition);
+}
+
+.saved-game-card:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 8px 25px rgba(0, 240, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+.saved-game-info h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.35rem;
+  color: #fff;
+}
+
+.saved-game-meta {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.saved-game-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.saved-game-actions {
+  display: flex;
+  gap: 0.75rem;
+}

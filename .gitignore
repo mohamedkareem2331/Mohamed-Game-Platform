@@ -1,0 +1,15 @@
+# Python & PyInstaller Build Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.spec
+pyi_build_*/
+games_web/
+
+# Pygbag Caches
+*-cache/
+*.build/
+
+# Operating System Files
+.DS_Store
+Thumbs.db

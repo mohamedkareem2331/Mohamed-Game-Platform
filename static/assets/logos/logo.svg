@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" fill="none">
+  <defs>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="50%" stop-color="#7928ca" />
+      <stop offset="100%" stop-color="#ff007a" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffd700" />
+      <stop offset="100%" stop-color="#ff8800" />
+    </linearGradient>
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="badgeGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur2" />
+      <feComposite in="SourceGraphic" in2="blur2" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Emblem Icon: Cyber Shield + Gamepad -->
+  <g transform="translate(15, 10)">
+    <!-- Hexagonal Glow Frame -->
+    <polygon points="50,2 95,25 95,75 50,98 5,75 5,25" fill="#0f1424" stroke="url(#primaryGrad)" stroke-width="3" filter="url(#badgeGlow)" />
+    <!-- Inner Accent Ring -->
+    <polygon points="50,10 87,30 87,70 50,90 13,70 13,30" fill="#141a30" stroke="#00f0ff" stroke-width="1.2" opacity="0.6"/>
+    
+    <!-- Gamepad Center Element -->
+    <path d="M30 45 C30 38, 38 34, 50 34 C62 34, 70 38, 70 45 C70 58, 65 68, 60 68 C56 68, 54 62, 50 62 C46 62, 44 68, 40 68 C35 68, 30 58, 30 45 Z" fill="#090d1a" stroke="url(#primaryGrad)" stroke-width="2" />
+    
+    <!-- D-Pad -->
+    <path d="M38 48 L42 48 M40 46 L40 50" stroke="#00f0ff" stroke-width="2.5" stroke-linecap="round" />
+    
+    <!-- Action Buttons -->
+    <circle cx="58" cy="46" r="1.8" fill="#ff007a" />
+    <circle cx="62" cy="50" r="1.8" fill="#ffd700" />
+    <circle cx="58" cy="54" r="1.8" fill="#00f0ff" />
+    <circle cx="54" cy="50" r="1.8" fill="#00ff66" />
+    
+    <!-- Neon Crown/Apex -->
+    <polygon points="50,16 57,25 43,25" fill="url(#goldGrad)" />
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="130" y="52" font-family="'Orbitron', 'Segoe UI', system-ui, sans-serif" font-size="28" font-weight="900" fill="#ffffff" letter-spacing="3.5">
+    MOHAMED <tspan fill="url(#primaryGrad)">KAREEM</tspan>
+  </text>
+  
+  <text x="132" y="82" font-family="'Rajdhani', 'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#00f0ff" letter-spacing="7" filter="url(#neonGlow)">
+    G A M E S
+  </text>
+
+  <!-- Subtitle Tag -->
+  <rect x="250" y="71" width="160" height="16" rx="4" fill="#141a30" stroke="#ff007a" stroke-width="1" />
+  <text x="258" y="82.5" font-family="'Segoe UI', monospace" font-size="9" font-weight="700" fill="#ff99cc" letter-spacing="1.5">
+    INDEPENDENT PLATFORM
+  </text>
+</svg>

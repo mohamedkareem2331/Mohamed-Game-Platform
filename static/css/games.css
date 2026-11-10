@@ -1,0 +1,228 @@
+/* MOHAMED KAREEM GAMES - INDIVIDUAL GAME PLAYER STYLES */
+
+.game-page-wrapper {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.game-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.game-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.game-breadcrumb a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* GAME CANVAS FRAME */
+.arcade-cabinet {
+  background: #080a14;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 240, 255, 0.15);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cabinet-hud-header {
+  background: rgba(14, 18, 33, 0.95);
+  border-bottom: 1px solid var(--border-glass);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cabinet-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cabinet-game-title {
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.cabinet-controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.cabinet-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition);
+}
+
+.cabinet-btn:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+.cabinet-btn.save-btn:hover {
+  background: rgba(0, 255, 136, 0.15);
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+
+.cabinet-screen-area {
+  position: relative;
+  width: 100%;
+  min-height: 620px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#game-canvas {
+  display: block;
+  max-width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+  outline: none;
+  border: none;
+}
+
+/* OVERLAY NOTICE / STATUS */
+.game-overlay-toast {
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(9, 13, 26, 0.92);
+  border: 1px solid var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+  padding: 0.65rem 1.5rem;
+  border-radius: 30px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.game-overlay-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(5px);
+}
+
+/* GAME INFO & INSTRUCTIONS SPLIT */
+.game-details-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.game-card-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+}
+
+.game-card-panel h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.25rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.key-bindings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.key-bindings-table tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.key-bindings-table td {
+  padding: 0.75rem 0.5rem;
+  font-size: 0.95rem;
+}
+
+.key-tag {
+  display: inline-block;
+  background: rgba(18, 24, 43, 0.95);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  font-size: 0.85rem;
+}
+
+.feature-check-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.feature-check-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.feature-check-list li::before {
+  content: '✔';
+  color: var(--neon-green);
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .game-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .cabinet-screen-area {
+    min-height: 400px;
+  }
+}

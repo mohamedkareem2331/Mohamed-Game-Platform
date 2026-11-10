@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050614"/>
+      <stop offset="50%" stop-color="#0c102b"/>
+      <stop offset="100%" stop-color="#190730"/>
+    </linearGradient>
+    <linearGradient id="neonLaser" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#7000ff"/>
+    </linearGradient>
+    <linearGradient id="thrusterFire" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff007a"/>
+      <stop offset="100%" stop-color="#ffbb00"/>
+    </linearGradient>
+    <filter id="sGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Deep Space Backdrop -->
+  <rect width="800" height="500" fill="url(#sBgGrad)"/>
+
+  <!-- Starfield Clusters -->
+  <g fill="#ffffff" opacity="0.8">
+    <circle cx="80" cy="70" r="1.5"/><circle cx="210" cy="110" r="1"/><circle cx="340" cy="60" r="2"/>
+    <circle cx="580" cy="85" r="1"/><circle cx="710" cy="130" r="2.5"/><circle cx="150" cy="220" r="1"/>
+    <circle cx="670" cy="240" r="1.5"/><circle cx="90" cy="380" r="2"/><circle cx="730" cy="390" r="1.5"/>
+  </g>
+
+  <!-- Nebula Clouds -->
+  <ellipse cx="280" cy="160" rx="200" ry="80" fill="#7000ff" opacity="0.25" filter="url(#sGlow)"/>
+  <ellipse cx="520" cy="200" rx="180" ry="90" fill="#00f0ff" opacity="0.2" filter="url(#sGlow)"/>
+
+  <!-- Alien Invaders Grid Formation -->
+  <g transform="translate(400, 120)" filter="url(#sGlow)">
+    <!-- Invader 1 (Center) -->
+    <path d="M-40,-30 L40,-30 L50,-10 L30,10 L-30,10 L-50,-10 Z" fill="#ff007a" opacity="0.9"/>
+    <circle cx="-18" cy="-15" r="5" fill="#ffffff"/>
+    <circle cx="18" cy="-15" r="5" fill="#ffffff"/>
+
+    <!-- Invader Left -->
+    <path d="M-160,-20 L-100,-20 L-90,0 L-110,15 L-150,15 L-170,0 Z" fill="#00f0ff" opacity="0.8"/>
+    <!-- Invader Right -->
+    <path d="M100,-20 L160,-20 L170,0 L150,15 L110,15 L90,0 Z" fill="#00f0ff" opacity="0.8"/>
+  </g>
+
+  <!-- Laser Beams -->
+  <line x1="380" y1="210" x2="380" y2="135" stroke="#00f0ff" stroke-width="4" filter="url(#sGlow)"/>
+  <line x1="420" y1="210" x2="420" y2="135" stroke="#00f0ff" stroke-width="4" filter="url(#sGlow)"/>
+  <line x1="390" y1="130" x2="390" y2="190" stroke="#ff007a" stroke-width="3" stroke-dasharray="8 6"/>
+  <line x1="410" y1="130" x2="410" y2="190" stroke="#ff007a" stroke-width="3" stroke-dasharray="8 6"/>
+
+  <!-- Starship Hero Sprite (Detailed Silhouette) -->
+  <g transform="translate(400, 245)" filter="url(#sGlow)">
+    <!-- Thruster Flame -->
+    <polygon points="-12,30 12,30 0,65" fill="url(#thrusterFire)"/>
+    <!-- Main Hull -->
+    <polygon points="0,-45 25,25 15,30 -15,30 -25,25" fill="#1b2447" stroke="#00f0ff" stroke-width="3"/>
+    <!-- Cockpit Canopy -->
+    <polygon points="0,-25 8,-5 -8,-5" fill="#00f0ff"/>
+    <!-- Plasma Cannons Wings -->
+    <polygon points="-48,15 -25,5 -20,28 -45,30" fill="#0f1730" stroke="#ff007a" stroke-width="2"/>
+    <polygon points="48,15 25,5 20,28 45,30" fill="#0f1730" stroke="#ff007a" stroke-width="2"/>
+  </g>
+
+  <!-- Floating Tags -->
+  <rect x="50" y="45" width="130" height="32" rx="16" fill="#0c1833" stroke="#00f0ff" stroke-width="1.5"/>
+  <text x="115" y="66" fill="#00f0ff" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">ARCADE</text>
+
+  <rect x="610" y="45" width="140" height="32" rx="16" fill="#1f0c29" stroke="#ff007a" stroke-width="1.5"/>
+  <text x="680" y="66" fill="#ff70bb" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">7 DIFFICULTIES</text>
+
+  <!-- Typography -->
+  <text x="400" y="380" fill="#ffffff" font-family="'Orbitron', 'Segoe UI', sans-serif" font-size="34" font-weight="900" text-anchor="middle" letter-spacing="3">
+    SPACE INVASION INVADERS
+  </text>
+  <text x="400" y="415" fill="#00f0ff" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="600" text-anchor="middle" letter-spacing="2">
+    WEAPON EVOLUTION • 50-SHOT MAGAZINE • RETRO AUDIO
+  </text>
+  <text x="400" y="445" fill="#9ba3af" font-family="'Segoe UI', sans-serif" font-size="13" text-anchor="middle">
+    Original Artwork • Procedural SFX • Parallax Stars • High Scores
+  </text>
+</svg>

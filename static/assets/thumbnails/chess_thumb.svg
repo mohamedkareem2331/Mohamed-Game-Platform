@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1017"/>
+      <stop offset="40%" stop-color="#161512"/>
+      <stop offset="100%" stop-color="#2a1f14"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe29a"/>
+      <stop offset="50%" stop-color="#d9b875"/>
+      <stop offset="100%" stop-color="#9a7332"/>
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#0066ff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+
+  <!-- Isometric Board Grid Effect -->
+  <g opacity="0.35" transform="translate(400, 260) scale(1, 0.5) rotate(45)">
+    <rect x="-240" y="-240" width="480" height="480" fill="none" stroke="#d9b875" stroke-width="4"/>
+    <!-- Squares -->
+    <path d="M-240,-180 H240 M-240,-120 H240 M-240,-60 H240 M-240,0 H240 M-240,60 H240 M-240,120 H240 M-240,180 H240" stroke="#d9b875" stroke-width="1.5" opacity="0.5"/>
+    <path d="M-180,-240 V240 M-120,-240 V240 M-60,-240 V240 M0,-240 V240 M60,-240 V240 M120,-240 V240 M180,-240 V240" stroke="#d9b875" stroke-width="1.5" opacity="0.5"/>
+  </g>
+
+  <!-- Glowing Chess Knight Silhouette & Crest -->
+  <g transform="translate(400, 210)" filter="url(#glow)">
+    <!-- Base Glow Circle -->
+    <circle cx="0" cy="0" r="140" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="10 6" opacity="0.4"/>
+    <circle cx="0" cy="0" r="120" fill="#141210" stroke="url(#goldGrad)" stroke-width="4"/>
+    
+    <!-- Stylized Knight Piece -->
+    <path d="M-35,65 L35,65 L30,52 C30,48 20,44 18,35 C16,20 30,12 28,-15 C26,-38 12,-55 -8,-65 C-22,-71 -35,-65 -40,-45 C-42,-38 -38,-28 -28,-22 C-38,-15 -48,0 -45,20 C-43,35 -35,50 -35,65 Z" fill="url(#goldGrad)"/>
+    <circle cx="-15" cy="-35" r="5" fill="#161512"/>
+    <path d="M-8,-15 L12,-15" stroke="#161512" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Floating Badges -->
+  <rect x="50" y="45" width="130" height="32" rx="16" fill="#1e1b16" stroke="#d9b875" stroke-width="1.5"/>
+  <text x="115" y="66" fill="#ffe29a" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">STRATEGY</text>
+
+  <rect x="620" y="45" width="130" height="32" rx="16" fill="#141a29" stroke="#00f0ff" stroke-width="1.5"/>
+  <text x="685" y="66" fill="#00f0ff" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">MINIMAX AI</text>
+
+  <!-- Typography -->
+  <text x="400" y="390" fill="#ffffff" font-family="'Orbitron', 'Segoe UI', sans-serif" font-size="34" font-weight="900" text-anchor="middle" letter-spacing="3">
+    PYTHON CHESS
+  </text>
+  <text x="400" y="425" fill="#d9b875" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="600" text-anchor="middle" letter-spacing="2">
+    LOCAL ARENA • 4 AI LEVELS • 7 THEMES
+  </text>
+  <text x="400" y="455" fill="#888075" font-family="'Segoe UI', sans-serif" font-size="13" text-anchor="middle">
+    Full Legal Moves • Undo • Move Notation • Save State
+  </text>
+</svg>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIGHTFALL: Zombie Survival — MOHAMED KAREEM GAMES</title>
+  <meta name="description" content="Play NIGHTFALL: Zombie Survival by Mohamed Kareem in your browser or download the standalone Windows PC executable.">
+  <link rel="icon" type="image/svg+xml" href="../static/assets/logos/logo.svg">
+  <link rel="stylesheet" href="../static/css/main.css">
+  <link rel="stylesheet" href="../static/css/games.css">
+  <style>
+    .game-canvas-wrapper {
+      width: 100%;
+      background: #000;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #game-canvas {
+      width: 100%;
+      max-width: 1100px;
+      height: auto;
+      aspect-ratio: 1100 / 700;
+      display: block;
+      background: #0d1119;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Animated Background Particles -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="radial-glow-top"></div>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="../index.html" class="brand-link" aria-label="Mohamed Kareem Games Home">
+          <img src="../static/assets/logos/logo.svg" alt="Mohamed Kareem Games Logo" class="brand-logo-img">
+        </a>
+        <ul class="nav-links">
+          <li><a href="../index.html" class="nav-item">Home</a></li>
+          <li><a href="../index.html#games-section" class="nav-item">Game Library</a></li>
+          <li><a href="../library.html" class="nav-item">My Collection</a></li>
+          <li><a href="../about.html" class="nav-item">About Developer</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="../builds/NightfallZombieSurvival-v1.0.exe" class="btn btn-download btn-sm" download>⭳ Download Windows .EXE</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="game-page-wrapper">
+    <!-- Breadcrumb & Direct Action Bar -->
+    <div class="game-top-bar">
+      <div class="game-breadcrumb">
+        <a href="../index.html">Platform</a>
+        <span>/</span>
+        <a href="../index.html#games-section">Library</a>
+        <span>/</span>
+        <span style="color: #fff;">NIGHTFALL: Zombie Survival</span>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button class="cabinet-btn" onclick="toggleGameFav(event, 'zombie')">★ Favorite</button>
+        <a href="../builds/NightfallZombieSurvival-v1.0.exe" class="btn btn-download btn-sm" download>⭳ Download for Windows PC (14.0 MB)</a>
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="game-toast" class="game-overlay-toast">Game Screen Focused</div>
+
+    <!-- Arcade Cabinet Frame -->
+    <section class="arcade-cabinet" id="cabinet-shell">
+      <div class="cabinet-hud-header">
+        <div class="cabinet-title-group">
+          <span style="font-size: 1.4rem;">☣️</span>
+          <h2 class="cabinet-game-title">NIGHTFALL: ZOMBIE SURVIVAL</h2>
+          <span class="hero-badge" style="margin: 0; padding: 0.15rem 0.6rem; font-size: 0.75rem; border-color: var(--neon-green); color: var(--neon-green);">
+            INSTANT WEB ENGINE
+          </span>
+        </div>
+
+        <div class="cabinet-controls-bar">
+          <button class="cabinet-btn" onclick="triggerRestart()">🔄 Restart Game</button>
+          <button class="cabinet-btn" onclick="toggleCabinetFullscreen()">⛶ Fullscreen</button>
+          <a href="../builds/NightfallZombieSurvival-v1.0.exe" class="cabinet-btn" download>⭳ Download .EXE</a>
+        </div>
+      </div>
+
+      <!-- Playable Area -->
+      <div class="game-canvas-wrapper">
+        <canvas id="game-canvas" tabindex="1"></canvas>
+      </div>
+    </section>
+
+    <!-- Details & Guide Grid -->
+    <div class="game-details-grid">
+      <div class="game-card-panel">
+        <h3>📖 Game Overview & Mechanics</h3>
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem;">
+          Engineered by <strong>Mohamed Kareem</strong>, <strong>NIGHTFALL</strong> is a high-intensity 360-degree top-down survival arcade game. 
+          The browser edition runs the authentic game engine directly on HTML5 Canvas, guaranteeing 100% preservation of physics, enemy speeds, collision logic, particles, and rogue-lite upgrades.
+        </p>
+
+        <ul class="feature-check-list">
+          <li><strong>Relentless Undead Waves:</strong> Escalating horde counts with varied health pools and rush speeds.</li>
+          <li><strong>Boss Battles:</strong> Massive, high-health boss encounters spawn every 5th wave.</li>
+          <li><strong>Rogue-lite Upgrades:</strong> Level up through XP crystals to choose from 3 randomized perks (Fire Rate, Bullet Damage, Speed, Dash Cooldown, Max Health).</li>
+          <li><strong>Kinetic Combat:</strong> Includes tactical dash with iframe window, particle splatters, screen shake, and floating damage numbers.</li>
+        </ul>
+      </div>
+
+      <div class="game-card-panel">
+        <h3>🎮 Controls & Keyboard Mapping</h3>
+        <table class="key-bindings-table">
+          <tr>
+            <td><span class="key-tag">W, A, S, D</span></td>
+            <td>Move survivor in 8 directions</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Mouse Aim</span></td>
+            <td>360-degree cursor aiming</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Left Click</span></td>
+            <td>Fire primary projectiles</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Spacebar</span></td>
+            <td>Tactical Dash / Evade (recharges on cooldown)</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">1, 2, 3</span></td>
+            <td>Select upgrade perk upon Level Up</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">P / Escape</span></td>
+            <td>Pause / Resume game</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Enter</span></td>
+            <td>Start new run / Restart after Game Over</td>
+          </tr>
+        </table>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+          <a href="../builds/NightfallZombieSurvival-v1.0.exe" class="btn btn-download" style="width: 100%;" download>
+            ⭳ Download Windows PC Version (14.0 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="border: none; padding: 0;">
+      <p>&copy; 2026 Mohamed Kareem Games. All rights reserved.</p>
+      <p>Original source: <code>main.py</code>, <code>entities.py</code>, <code>settings.py</code>, <code>ui.py</code></p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../static/js/games-registry.js"></script>
+  <script src="../static/js/storage.js"></script>
+  <script src="../static/js/games/zombie-game.js"></script>
+  <script>
+    let activeGame = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.mkStorage) {
+        window.mkStorage.recordPlayed("zombie");
+      }
+      activeGame = new window.ZombieGame("game-canvas");
+    });
+
+    function triggerRestart() {
+      if (activeGame) {
+        activeGame.reset();
+        activeGame.state = "playing";
+        showToast("Zombie Survival Restarted!");
+      }
+    }
+
+    function toggleCabinetFullscreen() {
+      const cabinet = document.getElementById("cabinet-shell");
+      if (!document.fullscreenElement) {
+        cabinet.requestFullscreen().catch(err => alert("Fullscreen error: " + err.message));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("game-toast");
+      toast.textContent = msg;
+      toast.classList.add("visible");
+      setTimeout(() => toast.classList.remove("visible"), 2500);
+    }
+  </script>
+</body>
+</html>

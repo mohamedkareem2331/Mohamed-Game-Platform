@@ -130,6 +130,49 @@ const MK_GAMES_CATALOG = [
     ],
     saveSupported: true,
     saveType: "Local high scores, chosen difficulty preference, weapon stats"
+  },
+  {
+    id: "dungeon",
+    slug: "dungeon",
+    title: "Dungeon: The Hollow Crown",
+    shortName: "Dungeon Crawler",
+    category: "RPG",
+    badge: "Roguelike RPG",
+    tagline: "Descend 5 floors of procedural dungeons, manage hunger & potions, and recover the Hollow Crown.",
+    description: "A complete, turn-based roguelike dungeon crawler created by Mohamed Kareem. Descend through 5 procedurally generated floors with dynamic fog of war, explored-area minimap, animated Craftpix orc mobs, melee and bow combat, hidden traps, loot chests, weapon/armor upgrades, synthesized sound effects, and the ultimate Guardian boss encounter. Features automatic saving to browser local storage and native Windows executable.",
+    version: "1.0.0",
+    releaseDate: "November 2026",
+    developer: "Mohamed Kareem",
+    framework: "Python 3.12 + Pygame-CE / Canvas Web Player",
+    featured: true,
+    status: "published",
+    rating: 5.0,
+    players: "Single Player",
+    thumbnail: "static/assets/thumbnails/dungeon_thumb.svg",
+    playUrl: "games/dungeon.html",
+    downloadUrl: "builds/DungeonTheHollowCrown-v1.0.exe",
+    fileSize: "24.0 MB",
+    compatibility: "Windows 10 / 11 (64-bit)",
+    controls: [
+      { key: "WASD / Arrows", action: "Move Hero / Walk into enemy to melee attack" },
+      { key: "B", action: "Fire Bow arrow at nearest enemy with clear line of sight" },
+      { key: "Q", action: "Drink Healing Potion (restores up to 40 HP)" },
+      { key: "F", action: "Eat Ration (refills hunger & restores up to 12 HP)" },
+      { key: "Spacebar", action: "Wait a turn / Rest" },
+      { key: "E", action: "Descend stairs / Claim the Crown after Guardian" },
+      { key: "ESC", action: "Pause / Resume game" },
+      { key: "I", action: "Open Field Guide & Bestiary" }
+    ],
+    features: [
+      "5 Procedurally generated dungeon floors with fog of war & dynamic minimap",
+      "Animated Craftpix orc tribes, melee combat, and ranged bow combat",
+      "Chests with automatic weapon & armor tier upgrades",
+      "Hunger system with food management and healing potions",
+      "Hidden traps, experience leveling, and synthesized audio effects",
+      "Automatic expedition progress saving via browser LocalStorage"
+    ],
+    saveSupported: true,
+    saveType: "Expedition floor, player stats, inventory, equipment & seed"
   }
 ];
 
@@ -140,7 +183,7 @@ window.MKGames = {
     return this.catalog.find(g => g.id === id || g.slug === id);
   },
   getCategories: function() {
-    return ["All", "Arcade", "Strategy", "Survival"];
+    return ["All", "Arcade", "Strategy", "Survival", "RPG"];
   },
   getFeatured: function() {
     return this.catalog.filter(g => g.featured);

@@ -230,6 +230,34 @@
           </div>
         </div>
       `;
+
+      // Dungeon: The Hollow Crown progress
+      try {
+        const dungeonRaw = localStorage.getItem('dungeon-hollow-crown-v1');
+        if (dungeonRaw) {
+          const dungeonData = JSON.parse(dungeonRaw);
+          const floorNames = ["Threshold of Bone", "The Sunken Crypts", "The Ashen Vaults", "The Obsidian Keep", "The Hollow Sanctum"];
+          const floorText = floorNames[(dungeonData.floor || 1) - 1] || `Floor ${dungeonData.floor || 1}`;
+          savedHtml += `
+            <div class="saved-game-card">
+              <div class="saved-game-info">
+                <h4>🗝️ Dungeon: The Hollow Crown (Active Expedition)</h4>
+                <div class="saved-game-meta">
+                  <span>🏰 Location: ${floorText}</span>
+                  <span>❤️ Health: ${dungeonData.player?.hp || 'Full'}</span>
+                  <span>🍗 Hunger: ${dungeonData.player?.hunger ?? 100}%</span>
+                  <span>⚔️ Level: ${dungeonData.player?.level || 1}</span>
+                </div>
+              </div>
+              <div class="saved-game-actions">
+                <a href="games/dungeon.html" class="btn btn-primary btn-sm">▶ Continue Descent</a>
+                <button class="btn btn-outline btn-sm" onclick="clearDungeonSave()">Clear Save</button>
+              </div>
+            </div>
+          `;
+        }
+      } catch (e) {}
+
       savedList.innerHTML = savedHtml;
 
       // 4. Recently Played
@@ -309,6 +337,13 @@
     function clearChessMatch() {
       if (confirm("Are you sure you want to clear your saved Chess game?")) {
         window.mkStorage.clearChessSave();
+        renderDashboard();
+      }
+    }
+
+    function clearDungeonSave() {
+      if (confirm("Are you sure you want to abandon your saved Dungeon expedition?")) {
+        localStorage.removeItem('dungeon-hollow-crown-v1');
         renderDashboard();
       }
     }

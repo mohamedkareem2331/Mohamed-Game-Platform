@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dungeon: The Hollow Crown — MOHAMED KAREEM GAMES</title>
+  <meta name="description" content="Play Dungeon: The Hollow Crown by Mohamed Kareem in your browser or download the standalone Windows PC executable.">
+  <link rel="icon" type="image/svg+xml" href="../static/assets/logos/logo.svg">
+  <link rel="stylesheet" href="../static/css/main.css">
+  <link rel="stylesheet" href="../static/css/games.css">
+  <style>
+    .game-canvas-wrapper {
+      width: 100%;
+      background: #080c13;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 0 0 12px 12px;
+    }
+    #game-canvas {
+      width: 100%;
+      max-width: 1200px;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      display: block;
+      background: #080c13;
+      outline: none;
+      cursor: crosshair;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Animated Background Particles -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="radial-glow-top"></div>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="../index.html" class="brand-link" aria-label="Mohamed Kareem Games Home">
+          <img src="../static/assets/logos/logo.svg" alt="Mohamed Kareem Games Logo" class="brand-logo-img">
+        </a>
+        <ul class="nav-links">
+          <li><a href="../index.html" class="nav-item">Home</a></li>
+          <li><a href="../index.html#games-section" class="nav-item">Game Library</a></li>
+          <li><a href="../library.html" class="nav-item">My Collection</a></li>
+          <li><a href="../about.html" class="nav-item">About Developer</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="../builds/DungeonTheHollowCrown-v1.0.exe" class="btn btn-download btn-sm" download>⭳ Download Windows .EXE</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="game-page-wrapper">
+    <!-- Breadcrumb & Top Bar -->
+    <div class="game-top-bar">
+      <div class="game-breadcrumb">
+        <a href="../index.html">Platform</a>
+        <span>/</span>
+        <a href="../index.html#games-section">Library</a>
+        <span>/</span>
+        <span style="color: #fff;">Dungeon: The Hollow Crown</span>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button class="cabinet-btn" onclick="toggleGameFav(event, 'dungeon')">★ Favorite</button>
+        <a href="../builds/DungeonTheHollowCrown-v1.0.exe" class="btn btn-download btn-sm" download>⭳ Download for Windows PC (24.0 MB)</a>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="game-toast" class="game-overlay-toast">Dungeon Ready</div>
+
+    <!-- Arcade Cabinet Frame -->
+    <section class="arcade-cabinet" id="cabinet-shell">
+      <div class="cabinet-hud-header">
+        <div class="cabinet-title-group">
+          <span style="font-size: 1.4rem;">🗝️</span>
+          <h2 class="cabinet-game-title">DUNGEON: THE HOLLOW CROWN</h2>
+          <span class="hero-badge" style="margin: 0; padding: 0.15rem 0.6rem; font-size: 0.75rem;">
+            ROGUELIKE RPG &bull; INSTANT WEB ENGINE
+          </span>
+        </div>
+
+        <div class="cabinet-controls-bar">
+          <button class="cabinet-btn" onclick="triggerRestart()">🔄 Restart Run</button>
+          <button class="cabinet-btn" onclick="toggleCabinetFullscreen()">⛶ Fullscreen</button>
+          <a href="../builds/DungeonTheHollowCrown-v1.0.exe" class="cabinet-btn" download>⭳ Download .EXE</a>
+        </div>
+      </div>
+
+      <!-- Playable Area (Native HTML5 Canvas) -->
+      <div class="game-canvas-wrapper" id="game-container">
+        <canvas id="game-canvas" tabindex="1" width="1280" height="800"></canvas>
+      </div>
+    </section>
+
+    <!-- Details & Guide Grid -->
+    <div class="game-details-grid">
+      <div class="game-card-panel">
+        <h3>📖 Game Overview & Expedition Mechanics</h3>
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem;">
+          Created by <strong>Mohamed Kareem</strong>, <em>Dungeon: The Hollow Crown</em> is a tactical turn-based dungeon crawler. 
+          Descend through 5 procedurally generated floors of ancient ruins, manage hunger and wounds, collect enchanted relics, 
+          and conquer the final Guardian to claim the Hollow Crown.
+        </p>
+
+        <ul class="feature-check-list">
+          <li><strong>Turn-Based Tactical System:</strong> Enemies only react and move when you take an action. Plan every step carefully!</li>
+          <li><strong>Dynamic Fog of War & Minimap:</strong> Explore unmapped chambers with living line-of-sight and an auto-revealing minimap.</li>
+          <li><strong>5 Handcrafted Procedural Floors:</strong> The Forgotten Gate, Mossbound Halls, The Sunken Keep, Ember Vault, and The Hollow Throne.</li>
+          <li><strong>Loot & Upgrades:</strong> Chests automatically enhance weapon tiers and armor durability.</li>
+          <li><strong>Resource Management:</strong> Monitor Hunger (eat rations with <span class="key-tag">F</span>) and restore Health with potions (<span class="key-tag">Q</span>).</li>
+          <li><strong>Automatic LocalStorage Saves:</strong> Progress saves automatically in your browser so you can continue your expedition anytime.</li>
+        </ul>
+      </div>
+
+      <div class="game-card-panel">
+        <h3>🎮 Controls & Keyboard Mapping</h3>
+        <table class="key-bindings-table">
+          <tr>
+            <td><span class="key-tag">WASD / Arrows</span></td>
+            <td>Move Hero / Walk into enemy to melee attack</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">B</span></td>
+            <td>Fire Bow arrow at nearest enemy with clear line of sight</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Q</span></td>
+            <td>Drink Healing Potion (restores up to 40 Health)</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">F</span></td>
+            <td>Eat Ration (refills hunger & restores up to 12 Health)</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Spacebar</span></td>
+            <td>Wait a turn / Rest in place</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">E</span></td>
+            <td>Descend stairs / Claim Crown after Guardian victory</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Escape / P</span></td>
+            <td>Pause / Resume game</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">I</span></td>
+            <td>Open Field Guide & Bestiary</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">F11 / Alt + Enter</span></td>
+            <td>Toggle Fullscreen mode</td>
+          </tr>
+        </table>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+          <a href="../builds/DungeonTheHollowCrown-v1.0.exe" class="btn btn-download" style="width: 100%;" download>
+            ⭳ Download Windows PC Version (24.0 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="border: none; padding: 0;">
+      <p>&copy; 2026 Mohamed Kareem Games. All rights reserved.</p>
+      <p>Source Engine: <code>engine.py</code> / <code>main.py</code> | Native Standalone: <code>Dungeon.exe</code></p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../static/js/games-registry.js"></script>
+  <script src="../static/js/storage.js"></script>
+  <script src="../static/js/games/dungeon-game.js"></script>
+  <script>
+    let activeGame = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.mkStorage) {
+        window.mkStorage.recordPlayed("dungeon");
+      }
+
+      // Initialize game engine
+      activeGame = new window.DungeonGame("game-canvas");
+
+      // Auto-focus canvas for keyboard controls
+      const canvas = document.getElementById("game-canvas");
+      if (canvas) {
+        canvas.focus();
+      }
+    });
+
+    function triggerRestart() {
+      if (activeGame) {
+        if (confirm("Abandon current expedition and begin a new dungeon descent?")) {
+          activeGame.clearSave();
+          activeGame.initRun(Math.floor(Math.random() * 1000000));
+          showToast("New expedition generated!");
+        }
+      }
+    }
+
+    function toggleCabinetFullscreen() {
+      const shell = document.getElementById("cabinet-shell");
+      if (!document.fullscreenElement) {
+        shell.requestFullscreen().catch(err => {
+          console.warn("Fullscreen request failed", err);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("game-toast");
+      if (toast) {
+        toast.textContent = msg;
+        toast.classList.add("visible");
+        setTimeout(() => toast.classList.remove("visible"), 2500);
+      }
+    }
+
+    function toggleGameFav(event, id) {
+      if (window.mkStorage) {
+        const isFav = window.mkStorage.toggleFavorite(id);
+        event.currentTarget.classList.toggle("is-fav", isFav);
+        showToast(isFav ? "Added to Favorites!" : "Removed from Favorites");
+      }
+    }
+  </script>
+</body>
+</html>

@@ -105,13 +105,14 @@ p{margin:0}
 /* Laptop & Desktop Landscape Widescreen Mode */
 @media (min-width: 768px) {
   #app {
-    max-width: 1060px;
-    height: 100vh;
+    max-width: 100% !important;
+    width: 100vw !important;
+    height: 100vh !important;
     padding-inline: 24px;
     box-sizing: border-box;
   }
   .screen {
-    max-width: 880px;
+    max-width: 1040px;
     margin: 0 auto;
     width: 100%;
   }
@@ -130,11 +131,12 @@ p{margin:0}
   }
   #game {
     display: grid;
-    grid-template-columns: 1fr 280px;
+    grid-template-columns: 1fr 300px;
     grid-template-rows: auto auto auto 1fr;
     column-gap: 20px;
     row-gap: 8px;
-    height: 100%;
+    height: calc(100vh - 20px) !important;
+    max-height: 100vh !important;
     align-content: stretch;
   }
   #game .hud {
@@ -153,8 +155,8 @@ p{margin:0}
   #game .stage {
     grid-column: 1;
     grid-row: 4;
-    height: 100%;
-    min-height: 480px;
+    height: 100% !important;
+    min-height: 0 !important;
   }
   #game .ctl {
     grid-column: 2;
@@ -169,7 +171,7 @@ p{margin:0}
     border-radius: 16px;
     padding: 20px 16px;
     box-sizing: border-box;
-    height: 100%;
+    height: 100% !important;
   }
   #game .acts {
     width: 100%;

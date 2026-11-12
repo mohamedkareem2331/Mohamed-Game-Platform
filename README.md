@@ -1,6 +1,10 @@
 # MOHAMED KAREEM GAMES — PERSONAL GAMING PLATFORM
 
-Welcome to **MOHAMED KAREEM GAMES**, an independent personal gaming platform designed to showcase, play, save, and download games developed using **Python, Pygame, VS Code, and Google Antigravity**.
+> 🌐 **Official Live Website:**  
+> 👉 **[https://mohamedkareem2331.github.io/Mohamed-Game-Platform/](https://mohamedkareem2331.github.io/Mohamed-Game-Platform/)**  
+> *(Play all games instantly in your browser or download standalone PC .EXE files)*
+
+Welcome to **MOHAMED KAREEM GAMES**, an independent personal gaming platform designed to showcase, play, save, and download games developed using **Python, Pygame, HTML5 Canvas, VS Code, and Google Antigravity**.
 
 ---
 
@@ -38,6 +42,23 @@ Welcome to **MOHAMED KAREEM GAMES**, an independent personal gaming platform des
   * Procedurally synthesized 8-bit sound effects directly from memory buffers.
   * 7 Selectable difficulty modes with boss encounters and wave scaling.
 * **Windows PC Executable:** `builds/SpaceInvasionInvaders-v1.0.exe` (15.7 MB)
+
+### 4. Dungeon: The Hollow Crown
+* **Category:** Turn-Based Roguelike RPG
+* **Technology:** HTML5 Canvas Native Engine
+* **Features:**
+  * 5 Procedural floors with dynamic fog of war and explored minimap.
+  * Animated Craftpix orc tribes, melee sword combat, and bow combat.
+  * Food and potion management with automatic weapon/armor tier upgrades.
+* **Windows PC Executable:** `builds/DungeonTheHollowCrown-v1.0.exe` (24.0 MB)
+
+### 5. Hollow Keep
+* **Category:** Roguelike Maze & Timed Duel Arena
+* **Technology:** Responsive Landscape Engine + PyInstaller Desktop Bundle
+* **Features:**
+  * Scaled labyrinth dungeons against the clock with rhythmic sword & shield duels.
+  * Armory loadout upgrades, 11-monster Bestiary, Relic shelf, and Hearth Cat.
+* **Windows PC Executable:** `builds/HollowKeep-v1.0.exe` (11.5 MB)
 
 ---
 

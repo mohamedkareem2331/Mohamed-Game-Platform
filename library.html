@@ -258,6 +258,33 @@
         }
       } catch (e) {}
 
+      // Hollow Keep records
+      try {
+        const hkRaw = localStorage.getItem('hollowkeep.v1');
+        if (hkRaw) {
+          const hkData = JSON.parse(hkRaw);
+          if (hkData && (hkData.coins > 0 || hkData.best > 0 || hkData.pets > 0)) {
+            savedHtml += `
+              <div class="saved-game-card">
+                <div class="saved-game-info">
+                  <h4>🛡️ Hollow Keep: Dungeon Records</h4>
+                  <div class="saved-game-meta">
+                    <span>🏰 Max Cleared: Level ${hkData.best || 1}</span>
+                    <span>💰 Coins: ${hkData.coins || 0}</span>
+                    <span>⚔️ Hero Level: ${hkData.hl || 1}</span>
+                    <span>🐱 Cat Pats: ${hkData.pets || 0}</span>
+                  </div>
+                </div>
+                <div class="saved-game-actions">
+                  <a href="games/hollow-keep.html" class="btn btn-primary btn-sm">▶ Enter Keep</a>
+                  <button class="btn btn-outline btn-sm" onclick="clearHollowKeepSave()">Clear Save</button>
+                </div>
+              </div>
+            `;
+          }
+        }
+      } catch (e) {}
+
       savedList.innerHTML = savedHtml;
 
       // 4. Recently Played
@@ -344,6 +371,13 @@
     function clearDungeonSave() {
       if (confirm("Are you sure you want to abandon your saved Dungeon expedition?")) {
         localStorage.removeItem('dungeon-hollow-crown-v1');
+        renderDashboard();
+      }
+    }
+
+    function clearHollowKeepSave() {
+      if (confirm("Are you sure you want to erase all saved Hollow Keep progress (coins, gear, bestiary)?")) {
+        localStorage.removeItem('hollowkeep.v1');
         renderDashboard();
       }
     }

@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="hkBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e0c17"/>
+      <stop offset="45%" stop-color="#1b172e"/>
+      <stop offset="100%" stop-color="#2a1629"/>
+    </linearGradient>
+
+    <linearGradient id="amberGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe699"/>
+      <stop offset="40%" stop-color="#ffb454"/>
+      <stop offset="100%" stop-color="#c47d1d"/>
+    </linearGradient>
+
+    <linearGradient id="shieldTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8fe3ff"/>
+      <stop offset="50%" stop-color="#4fd1b5"/>
+      <stop offset="100%" stop-color="#1b8570"/>
+    </linearGradient>
+
+    <linearGradient id="roseGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff8fa8"/>
+      <stop offset="100%" stop-color="#d93b5d"/>
+    </linearGradient>
+
+    <filter id="hkGlow">
+      <feGaussianBlur stdDeviation="7" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="bigGlow">
+      <feGaussianBlur stdDeviation="15" result="bigBlur"/>
+      <feGaussianBlur stdDeviation="6" result="sharpBlur"/>
+      <feMerge>
+        <feMergeNode in="bigBlur"/>
+        <feMergeNode in="sharpBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#hkBg)"/>
+
+  <!-- Ancient Maze Corridor Grid Pattern (Subtle background) -->
+  <g opacity="0.25" stroke="#443e63" stroke-width="2" fill="none">
+    <!-- Concentric maze wall corridors -->
+    <rect x="180" y="70" width="440" height="260" rx="20"/>
+    <rect x="220" y="100" width="360" height="200" rx="16"/>
+    <rect x="260" y="130" width="280" height="140" rx="12"/>
+    <!-- Maze pathways and doors -->
+    <line x1="180" y1="200" x2="220" y2="200"/>
+    <line x1="580" y1="200" x2="620" y2="200"/>
+    <line x1="400" y1="70" x2="400" y2="100"/>
+    <line x1="400" y1="270" x2="400" y2="300"/>
+  </g>
+
+  <!-- Ambient Light Braziers -->
+  <circle cx="210" cy="180" r="40" fill="#ffb454" opacity="0.15" filter="url(#bigGlow)"/>
+  <circle cx="210" cy="180" r="5" fill="#ffe699" filter="url(#hkGlow)"/>
+  <circle cx="590" cy="180" r="40" fill="#4fd1b5" opacity="0.15" filter="url(#bigGlow)"/>
+  <circle cx="590" cy="180" r="5" fill="#8fe3ff" filter="url(#hkGlow)"/>
+
+  <!-- Floating Spark Embers -->
+  <g fill="#ffb454" opacity="0.7">
+    <circle cx="215" cy="140" r="2"/>
+    <circle cx="225" cy="115" r="1.5"/>
+    <circle cx="205" cy="95" r="2"/>
+    <circle cx="595" cy="140" r="2"/>
+    <circle cx="585" cy="115" r="1.5"/>
+    <circle cx="575" cy="95" r="2"/>
+  </g>
+
+  <!-- Central Crest: Runic Kite Shield & Enchanted Broadsword -->
+  <g transform="translate(400, 195)">
+    <!-- Magic Ring Aura -->
+    <circle cx="0" cy="0" r="130" fill="none" stroke="url(#shieldTeal)" stroke-width="2" stroke-dasharray="10 8" opacity="0.45" filter="url(#hkGlow)"/>
+    <circle cx="0" cy="0" r="105" fill="#14121f" stroke="url(#amberGold)" stroke-width="3.5" opacity="0.9"/>
+
+    <!-- Slanted Runic Sword (Behind Shield) -->
+    <g transform="rotate(-35)" filter="url(#hkGlow)">
+      <!-- Blade -->
+      <polygon points="0,-125 9,-40 6,45 -6,45 -9,-40" fill="url(#shieldTeal)"/>
+      <line x1="0" y1="-120" x2="0" y2="45" stroke="#ffffff" stroke-width="1.8"/>
+      <!-- Crossguard -->
+      <rect x="-24" y="45" width="48" height="8" rx="3" fill="url(#amberGold)"/>
+      <!-- Grip & Pommel -->
+      <rect x="-4" y="53" width="8" height="22" fill="#262239"/>
+      <circle cx="0" cy="79" r="7" fill="url(#amberGold)"/>
+    </g>
+
+    <!-- Runic Kite Shield (Foreground Center) -->
+    <g transform="translate(0, -5)" filter="url(#bigGlow)">
+      <!-- Outer Shield Body -->
+      <path d="M 0,-70 
+               C 35,-70 58,-55 58,-20 
+               C 58,35 25,65 0,85 
+               C -25,65 -58,35 -58,-20 
+               C -58,-55 -35,-70 0,-70 Z" 
+            fill="#262239" 
+            stroke="url(#shieldTeal)" 
+            stroke-width="3"/>
+
+      <!-- Inner Inset Trim -->
+      <path d="M 0,-58 
+               C 28,-58 46,-45 46,-16 
+               C 46,28 20,52 0,68 
+               C -20,52 -46,28 -46,-16 
+               C -46,-45 -28,-58 0,-58 Z" 
+            fill="#1b172e" 
+            stroke="url(#amberGold)" 
+            stroke-width="2"/>
+
+      <!-- Shield Emblem: The Hollow Keep Gate & Crown -->
+      <!-- Gate Arch -->
+      <path d="M -16,30 L -16,5 Q 0,-12 16,5 L 16,30" stroke="url(#amberGold)" stroke-width="2.5" fill="none"/>
+      <!-- Glowing Lantern Core -->
+      <circle cx="0" cy="4" r="8" fill="url(#amberGold)"/>
+      <circle cx="0" cy="4" r="3" fill="#ffffff"/>
+      <!-- Runic Eye of Hollow Keep -->
+      <circle cx="0" cy="-30" r="6" fill="url(#roseGlow)"/>
+    </g>
+  </g>
+
+  <!-- Floating Badges -->
+  <rect x="50" y="45" width="145" height="32" rx="16" fill="#1b172e" stroke="#ffb454" stroke-width="1.5"/>
+  <text x="122" y="66" fill="#ffe699" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">ROGUELIKE MAZE</text>
+
+  <rect x="605" y="45" width="145" height="32" rx="16" fill="#132426" stroke="#4fd1b5" stroke-width="1.5"/>
+  <text x="677" y="66" fill="#8fe3ff" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1">SWORD &#8226; SHIELD</text>
+
+  <!-- Typography -->
+  <text x="400" y="388" fill="#ffffff" font-family="'Orbitron', 'Pirata One', 'Segoe UI', sans-serif" font-size="36" font-weight="900" text-anchor="middle" letter-spacing="3">
+    HOLLOW KEEP
+  </text>
+  <text x="400" y="424" fill="#ffb454" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="600" text-anchor="middle" letter-spacing="2">
+    MAZE CRAWLER &amp; DUEL ARENA
+  </text>
+  <text x="400" y="452" fill="#a29cbd" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="500" text-anchor="middle" letter-spacing="1.5">
+    DUNGEONS &#8226; BESTIARY &#8226; ARMORY &#8226; ENDLESS RUN
+  </text>
+</svg>

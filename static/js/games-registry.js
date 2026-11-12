@@ -173,6 +173,47 @@ const MK_GAMES_CATALOG = [
     ],
     saveSupported: true,
     saveType: "Expedition floor, player stats, inventory, equipment & seed"
+  },
+  {
+    id: "hollow-keep",
+    slug: "hollow-keep",
+    title: "Hollow Keep",
+    shortName: "Hollow Keep",
+    category: "RPG",
+    badge: "Roguelike Maze",
+    tagline: "Explore procedural maze keeps, master rhythmic sword & shield combat, and vanquish Lord Hollow.",
+    description: "An enchanting dark fantasy dungeon crawler and duel arena created for Mohamed Kareem. Navigate dark maze corridors against the clock, collect chests, unlock weapons and armor in the Armory, fill your Bestiary across 11 monster variants, and challenge the Endless Run with Mossy the hearth cat.",
+    version: "1.0.0",
+    releaseDate: "November 2026",
+    developer: "Mohamed Kareem",
+    framework: "HTML5 Canvas + Web Audio API / Native WebView Desktop App",
+    featured: true,
+    status: "published",
+    rating: 5.0,
+    players: "Single Player",
+    thumbnail: "static/assets/thumbnails/hollow_keep_thumb.svg",
+    playUrl: "games/hollow-keep.html",
+    downloadUrl: "builds/HollowKeep-v1.0.exe",
+    fileSize: "11.5 MB",
+    compatibility: "Windows 10 / 11 (64-bit)",
+    controls: [
+      { key: "WASD / Arrows", action: "Navigate maze corridors" },
+      { key: "J / Z", action: "Attack Strike (when target ring glows)" },
+      { key: "K / X", action: "Raise Shield / Block enemy bursts" },
+      { key: "D-Pad", action: "Touch / Mouse controls on screen" },
+      { key: "Escape", action: "Leave dungeon / Return to Keep Menu" },
+      { key: "F11 / Alt + Enter", action: "Toggle Fullscreen mode" }
+    ],
+    features: [
+      "Timed labyrinth dungeons with scaling complexity and timers",
+      "Rhythmic Sword & Shield telegraph duel mechanics",
+      "Armory upgrade system (Weapons, Helmets, Boots)",
+      "Comprehensive Bestiary with 11 distinct monster species",
+      "Endless Run survival challenge & Trophy achievement room",
+      "Mossy the hearth cat companion"
+    ],
+    saveSupported: true,
+    saveType: "Armory gear, coins, unlocked levels, bestiary records & trophies"
   }
 ];
 

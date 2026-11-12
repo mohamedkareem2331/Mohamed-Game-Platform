@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hollow Keep — MOHAMED KAREEM GAMES</title>
+  <meta name="description" content="Play Hollow Keep by Mohamed Kareem in your browser or download the standalone Windows PC executable.">
+  <link rel="icon" type="image/svg+xml" href="../static/assets/logos/logo.svg">
+  <link rel="stylesheet" href="../static/css/main.css">
+  <link rel="stylesheet" href="../static/css/games.css">
+  <style>
+    .game-cabinet-wrapper {
+      width: 100%;
+      background: #0d0b17;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 0 0 12px 12px;
+      padding: 1.5rem 0;
+    }
+    .game-portrait-frame {
+      width: 100%;
+      max-width: 500px;
+      height: 780px;
+      border: 2px solid var(--border-glass);
+      border-radius: 20px;
+      background: #14121f;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 180, 84, 0.15);
+      overflow: hidden;
+    }
+    #game-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Animated Background Particles -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="radial-glow-top"></div>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="../index.html" class="brand-link" aria-label="Mohamed Kareem Games Home">
+          <img src="../static/assets/logos/logo.svg" alt="Mohamed Kareem Games Logo" class="brand-logo-img">
+        </a>
+        <ul class="nav-links">
+          <li><a href="../index.html" class="nav-item">Home</a></li>
+          <li><a href="../index.html#games-section" class="nav-item">Game Library</a></li>
+          <li><a href="../library.html" class="nav-item">My Collection</a></li>
+          <li><a href="../about.html" class="nav-item">About Developer</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="../builds/HollowKeep-v1.0.exe" class="btn btn-download btn-sm" download>⭳ Download Windows .EXE</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="game-page-wrapper">
+    <!-- Breadcrumb & Top Bar -->
+    <div class="game-top-bar">
+      <div class="game-breadcrumb">
+        <a href="../index.html">Platform</a>
+        <span>/</span>
+        <a href="../index.html#games-section">Library</a>
+        <span>/</span>
+        <span style="color: #fff;">Hollow Keep</span>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button class="cabinet-btn" onclick="toggleGameFav(event, 'hollow-keep')">★ Favorite</button>
+        <a href="../web_games/hollow_keep/index.html" target="_blank" class="cabinet-btn">↗ Open Standalone Tab</a>
+        <a href="../builds/HollowKeep-v1.0.exe" class="btn btn-download btn-sm" download>⭳ Download for Windows PC (11.5 MB)</a>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="game-toast" class="game-overlay-toast">Hollow Keep Ready</div>
+
+    <!-- Arcade Cabinet Frame -->
+    <section class="arcade-cabinet" id="cabinet-shell">
+      <div class="cabinet-hud-header">
+        <div class="cabinet-title-group">
+          <span style="font-size: 1.4rem;">🛡️</span>
+          <h2 class="cabinet-game-title">HOLLOW KEEP</h2>
+          <span class="hero-badge" style="margin: 0; padding: 0.15rem 0.6rem; font-size: 0.75rem;">
+            ROGUELIKE MAZE &bull; TIMED DUELS &bull; ARMORY
+          </span>
+        </div>
+
+        <div class="cabinet-controls-bar">
+          <button class="cabinet-btn" onclick="reloadGame()">🔄 Reload</button>
+          <button class="cabinet-btn" onclick="toggleCabinetFullscreen()">⛶ Fullscreen</button>
+          <a href="../web_games/hollow_keep/index.html" target="_blank" class="cabinet-btn">↗ Popout</a>
+          <a href="../builds/HollowKeep-v1.0.exe" class="cabinet-btn" download>⭳ Download .EXE</a>
+        </div>
+      </div>
+
+      <!-- Playable Area (Cabinet Portrait Display) -->
+      <div class="game-cabinet-wrapper" id="game-container">
+        <div class="game-portrait-frame">
+          <iframe 
+            id="game-frame" 
+            src="../web_games/hollow_keep/index.html" 
+            allow="fullscreen; autoplay; gamepad"
+            title="Hollow Keep">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details & Guide Grid -->
+    <div class="game-details-grid">
+      <div class="game-card-panel">
+        <h3>📖 Game Overview & Dungeon Systems</h3>
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem;">
+          Created for <strong>Mohamed Kareem</strong>, <em>Hollow Keep</em> is a dark fantasy dungeon maze crawler. 
+          Navigate procedural labyrinth keeps against the clock, defeat mythical beasts in rhythmic sword and shield duels, 
+          upgrade your loadout in the Armory, fill your Bestiary, unlock legendary relics, and conquer Lord Hollow himself!
+        </p>
+
+        <ul class="feature-check-list">
+          <li><strong>Sword & Shield Combat:</strong> Read enemy telegraphs! Strike with <span class="key-tag">Attack</span> when the ring glows, and raise <span class="key-tag">Shield</span> against enemy bursts.</li>
+          <li><strong>Procedural Labyrinth Keeps:</strong> Level 1 grants 3 minutes, with escalating dungeon sizes, rooms, and timers for subsequent levels.</li>
+          <li><strong>Armory Upgrades:</strong> Equip unlocked Weapons (Iron Blade, Broadsword, Flame Saber), Helmets, and Shoes with unique stat perks.</li>
+          <li><strong>Bestiary & Relic Shelf:</strong> Discover 11 unique monster species (Wisps, Imps, Bats, Slimes, Ghouls, Spiders, Gargoyles, Wraiths, Knights, Hounds, Boss) and ancient relics.</li>
+          <li><strong>Endless Mode & Trophies:</strong> Push your survival records in the Endless Run and collect prestigious mastery trophies.</li>
+          <li><strong>Hearth Cat Companion:</strong> Visit Mossy the hearth cat in the tavern between expeditions for good fortune!</li>
+        </ul>
+      </div>
+
+      <div class="game-card-panel">
+        <h3>🎮 Controls & Keyboard Mapping</h3>
+        <table class="key-bindings-table">
+          <tr>
+            <td><span class="key-tag">WASD / Arrows</span></td>
+            <td>Move Wanderer through the maze corridors</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">J / Z</span></td>
+            <td>Attack Strike (or tap on-screen Attack button)</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">K / X</span></td>
+            <td>Raise Shield / Block (or tap on-screen Shield button)</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">D-Pad Buttons</span></td>
+            <td>Touch / Mouse controls for on-screen movement</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Escape</span></td>
+            <td>Leave dungeon / Return to Keep Menu</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">F11 / Alt + Enter</span></td>
+            <td>Toggle Fullscreen mode</td>
+          </tr>
+        </table>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+          <a href="../builds/HollowKeep-v1.0.exe" class="btn btn-download" style="width: 100%;" download>
+            ⭳ Download Windows PC Version (11.5 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="border: none; padding: 0;">
+      <p>&copy; 2026 Mohamed Kareem Games. All rights reserved.</p>
+      <p>Source Engine: <code>Hollow Keep.html</code> | Native Standalone: <code>HollowKeep-v1.0.exe</code></p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../static/js/games-registry.js"></script>
+  <script src="../static/js/storage.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.mkStorage) {
+        window.mkStorage.recordPlayed("hollow-keep");
+      }
+    });
+
+    function reloadGame() {
+      const frame = document.getElementById("game-frame");
+      if (frame) {
+        frame.src = frame.src;
+        showToast("Hollow Keep reloaded!");
+      }
+    }
+
+    function toggleCabinetFullscreen() {
+      const shell = document.getElementById("cabinet-shell");
+      if (!document.fullscreenElement) {
+        shell.requestFullscreen().catch(err => {
+          console.warn("Fullscreen request failed", err);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("game-toast");
+      if (toast) {
+        toast.textContent = msg;
+        toast.classList.add("visible");
+        setTimeout(() => toast.classList.remove("visible"), 2500);
+      }
+    }
+
+    function toggleGameFav(event, id) {
+      if (window.mkStorage) {
+        const isFav = window.mkStorage.toggleFavorite(id);
+        event.currentTarget.classList.toggle("is-fav", isFav);
+        showToast(isFav ? "Added to Favorites!" : "Removed from Favorites");
+      }
+    }
+  </script>
+</body>
+</html>

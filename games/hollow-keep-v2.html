@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hollow Keep: Version 2 — MOHAMED KAREEM GAMES</title>
+  <meta name="description" content="Play Hollow Keep: Version 2 by Mohamed Kareem in your browser or download the standalone Windows PC executable. Featuring 3D first-person raycaster corridors, strafing, turning, and rhythmic combat.">
+  <link rel="icon" type="image/svg+xml" href="../static/assets/logos/logo.svg">
+  <link rel="stylesheet" href="../static/css/main.css">
+  <link rel="stylesheet" href="../static/css/games.css?v=2.1">
+  <style>
+    .game-cabinet-wrapper {
+      width: 100%;
+      background: #0d0b17;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 0 0 12px 12px;
+      padding: 1.5rem 0;
+    }
+    .game-screen-frame {
+      width: 100%;
+      max-width: 1100px;
+      height: 680px;
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      background: #14121f;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 180, 84, 0.15);
+      overflow: hidden;
+      display: flex;
+    }
+    #game-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* FULLSCREEN ARCADE: ZERO BLACK BOX, 100% SCREEN HEIGHT */
+    .arcade-cabinet:fullscreen,
+    .arcade-cabinet:-webkit-full-screen {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      border-radius: 0 !important;
+      background: #000 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+    }
+    .arcade-cabinet:fullscreen .cabinet-hud-header,
+    .arcade-cabinet:-webkit-full-screen .cabinet-hud-header {
+      height: 44px !important;
+      min-height: 44px !important;
+      padding: 0.35rem 1.5rem !important;
+      flex-shrink: 0 !important;
+      background: #090d1a !important;
+      z-index: 20 !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    .arcade-cabinet:fullscreen .game-cabinet-wrapper,
+    .arcade-cabinet:-webkit-full-screen .game-cabinet-wrapper {
+      flex: 1 1 0% !important;
+      width: 100vw !important;
+      height: calc(100vh - 44px) !important;
+      max-height: calc(100vh - 44px) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #000 !important;
+      overflow: hidden !important;
+      border-radius: 0 !important;
+    }
+    .arcade-cabinet:fullscreen .game-screen-frame,
+    .arcade-cabinet:-webkit-full-screen .game-screen-frame {
+      width: 100vw !important;
+      height: calc(100vh - 44px) !important;
+      max-width: 100vw !important;
+      max-height: calc(100vh - 44px) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+    .arcade-cabinet:fullscreen #game-frame,
+    .arcade-cabinet:-webkit-full-screen #game-frame {
+      width: 100vw !important;
+      height: calc(100vh - 44px) !important;
+      max-height: calc(100vh - 44px) !important;
+      border: none !important;
+      display: block !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Animated Background Particles -->
+  <canvas id="ambient-canvas"></canvas>
+  <div class="radial-glow-top"></div>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="../index.html" class="brand-link" aria-label="Mohamed Kareem Games Home">
+          <img src="../static/assets/logos/logo.svg" alt="Mohamed Kareem Games Logo" class="brand-logo-img">
+        </a>
+        <ul class="nav-links">
+          <li><a href="../index.html" class="nav-item">Home</a></li>
+          <li><a href="../index.html#games-section" class="nav-item">Game Library</a></li>
+          <li><a href="../library.html" class="nav-item">My Collection</a></li>
+          <li><a href="../about.html" class="nav-item">About Developer</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="../builds/HollowKeep-v2.0.exe" class="btn btn-download btn-sm" download>⭳ Download Windows .EXE</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="game-page-wrapper">
+    <!-- Breadcrumb & Top Bar -->
+    <div class="game-top-bar">
+      <div class="game-breadcrumb">
+        <a href="../index.html">Platform</a>
+        <span>/</span>
+        <a href="../index.html#games-section">Library</a>
+        <span>/</span>
+        <span style="color: #fff;">Hollow Keep: Version 2</span>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button class="cabinet-btn" onclick="toggleGameFav(event, 'hollow-keep-v2')">★ Favorite</button>
+        <a href="../web_games/hollow_keep_v2/index.html" target="_blank" class="cabinet-btn">↗ Open Standalone Tab</a>
+        <a href="../builds/HollowKeep-v2.0.exe" class="btn btn-download btn-sm" download>⭳ Download for Windows PC (11.5 MB)</a>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="game-toast" class="game-overlay-toast">Hollow Keep: Version 2 Ready</div>
+
+    <!-- Arcade Cabinet Frame -->
+    <section class="arcade-cabinet" id="cabinet-shell">
+      <div class="cabinet-hud-header">
+        <div class="cabinet-title-group">
+          <span style="font-size: 1.4rem;">👁️</span>
+          <h2 class="cabinet-game-title">HOLLOW KEEP: VERSION 2</h2>
+          <span class="hero-badge" style="margin: 0; padding: 0.15rem 0.6rem; font-size: 0.75rem; border-color: var(--neon-cyan); color: var(--neon-cyan);">
+            3D FIRST-PERSON RAYCASTER &bull; TIMED DUELS &bull; ARMORY
+          </span>
+        </div>
+
+        <div class="cabinet-controls-bar">
+          <button class="cabinet-btn" onclick="reloadGame()">🔄 Reload</button>
+          <button class="cabinet-btn" id="fs-toggle-btn" onclick="toggleCabinetFullscreen()">⛶ Fullscreen</button>
+          <a href="../web_games/hollow_keep_v2/index.html" target="_blank" class="cabinet-btn">↗ Popout</a>
+          <a href="../builds/HollowKeep-v2.0.exe" class="cabinet-btn" download>⭳ Download .EXE</a>
+        </div>
+      </div>
+
+      <!-- Playable Area (Cabinet Landscape Display) -->
+      <div class="game-cabinet-wrapper" id="game-container">
+        <div class="game-screen-frame">
+          <iframe 
+            id="game-frame" 
+            src="../web_games/hollow_keep_v2/index.html?v=2.1" 
+            allow="fullscreen; autoplay; gamepad"
+            title="Hollow Keep: Version 2">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details & Guide Grid -->
+    <div class="game-details-grid">
+      <div class="game-card-panel">
+        <h3>📖 Version 2 Overview & 3D Dungeon Mechanics</h3>
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem;">
+          Created for <strong>Mohamed Kareem</strong>, <em>Hollow Keep: Version 2</em> elevates the dark fantasy dungeon formula into a full 
+          <strong>first-person 3D raycaster experience</strong>! Step directly inside the stone corridors, peek around corners, strafe 
+          past lurking horrors, read combat telegraphs in direct melee confrontations, and claim the keeps against the clock.
+        </p>
+
+        <ul class="feature-check-list">
+          <li><strong>True First-Person Raycaster Perspective:</strong> Explore the labyrinth through living 3D corridors with depth lighting, wall-mounted flickering torches, and billboard sprites.</li>
+          <li><strong>Mouse & Touch Look-Around:</strong> Drag directly on the view to look around the keep, or double-click to lock mouse cursor for authentic PC dungeon-crawler immersion.</li>
+          <li><strong>6-Direction Spatial Movement:</strong> Walk forward, step backward, strafe sideways, and rotate turns smoothly using keyboard or on-screen controls.</li>
+          <li><strong>Visible Armaments & Telegraph Duels:</strong> Watch your wielded sword and shield animate directly in your hands as you time strikes and blocks against enemy tells.</li>
+          <li><strong>Armory Upgrades & Bestiary:</strong> Unlock swords, shields, helmets, boots, discover 11 monstrous beast species, and tackle the legendary Endless Run!</li>
+          <li><strong>Standalone Desktop Windows Executable:</strong> Downloadable as an offline `.exe` application running at full native resolution.</li>
+        </ul>
+      </div>
+
+      <div class="game-card-panel">
+        <h3>🎮 Controls & Keyboard Mapping</h3>
+        <table class="key-bindings-table">
+          <tr>
+            <td><span class="key-tag">W / Up</span></td>
+            <td>Walk forward into corridor</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">S / Down</span></td>
+            <td>Walk back / Retreat</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">A / D</span></td>
+            <td>Strafe left / Strafe right</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Q / E</span> or <span class="key-tag">← / →</span></td>
+            <td>Turn left / Turn right (90° rotation)</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Mouse Drag / Double Click</span></td>
+            <td>Look around in 3D (Esc to release cursor)</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Space / J / Z</span></td>
+            <td>Attack Strike (when ring glows)</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">K / X</span></td>
+            <td>Raise Shield / Block enemy burst attack</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">Escape</span></td>
+            <td>Leave dungeon / Return to Keep Menu</td>
+          </tr>
+          <tr>
+            <td><span class="key-tag">F11 / Alt + Enter</span></td>
+            <td>Toggle Fullscreen mode</td>
+          </tr>
+        </table>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+          <a href="../builds/HollowKeep-v2.0.exe" class="btn btn-download" style="width: 100%;" download>
+            ⭳ Download Windows PC Version 2.0 (11.5 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-bottom" style="border: none; padding: 0;">
+      <p>&copy; 2026 Mohamed Kareem Games. All rights reserved.</p>
+      <p>Source Engine: <code>Hollow Keep (1).html</code> | Native Standalone: <code>HollowKeep-v2.0.exe</code></p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../static/js/games-registry.js"></script>
+  <script src="../static/js/storage.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.mkStorage) {
+        window.mkStorage.recordPlayed("hollow-keep-v2");
+      }
+    });
+
+    function reloadGame() {
+      const frame = document.getElementById("game-frame");
+      if (frame) {
+        frame.src = frame.src;
+        showToast("Hollow Keep: Version 2 reloaded!");
+      }
+    }
+
+    function toggleCabinetFullscreen() {
+      const shell = document.getElementById("cabinet-shell");
+      if (!document.fullscreenElement) {
+        shell.requestFullscreen().catch(err => {
+          console.warn("Fullscreen request failed", err);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener("fullscreenchange", () => {
+      const isFs = !!document.fullscreenElement;
+      const fsBtn = document.getElementById("fs-toggle-btn");
+      if (fsBtn) {
+        fsBtn.innerHTML = isFs ? "🗗 Exit Fullscreen" : "⛶ Fullscreen";
+      }
+    });
+
+    function showToast(msg) {
+      const toast = document.getElementById("game-toast");
+      if (toast) {
+        toast.textContent = msg;
+        toast.classList.add("visible");
+        setTimeout(() => toast.classList.remove("visible"), 2500);
+      }
+    }
+
+    function toggleGameFav(event, id) {
+      if (window.mkStorage) {
+        const isFav = window.mkStorage.toggleFavorite(id);
+        event.currentTarget.classList.toggle("is-fav", isFav);
+        showToast(isFav ? "Added to Favorites!" : "Removed from Favorites");
+      }
+    }
+  </script>
+</body>
+</html>

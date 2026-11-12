@@ -214,6 +214,50 @@ const MK_GAMES_CATALOG = [
     ],
     saveSupported: true,
     saveType: "Armory gear, coins, unlocked levels, bestiary records & trophies"
+  },
+  {
+    id: "hollow-keep-v2",
+    slug: "hollow-keep-v2",
+    title: "Hollow Keep: Version 2",
+    shortName: "Hollow Keep v2",
+    category: "RPG",
+    badge: "First-Person 3D",
+    tagline: "First-person 3D raycaster dungeon crawler with strafing, turns, and rhythmic duel combat.",
+    description: "The next evolution of Hollow Keep created for Mohamed Kareem. Experience dark fantasy labyrinth keeps in living first-person 3D perspective with stone raycaster corridors, torchlight illumination, smooth turning, strafing, billboard monsters, mouse look-around, and visceral sword-and-shield duels.",
+    version: "2.0.0",
+    releaseDate: "November 2026",
+    developer: "Mohamed Kareem",
+    framework: "3D Canvas Raycaster + Web Audio API / Native WebView Desktop App",
+    featured: true,
+    status: "published",
+    rating: 5.0,
+    players: "Single Player",
+    thumbnail: "static/assets/thumbnails/hollow_keep_v2_thumb.svg",
+    playUrl: "games/hollow-keep-v2.html",
+    downloadUrl: "builds/HollowKeep-v2.0.exe",
+    fileSize: "11.5 MB",
+    compatibility: "Windows 10 / 11 (64-bit)",
+    controls: [
+      { key: "W / Up", action: "Walk forward into corridor" },
+      { key: "S / Down", action: "Walk back / Retreat" },
+      { key: "A / D", action: "Strafe Left / Strafe Right" },
+      { key: "Q / E or ← / →", action: "Turn Left / Turn Right" },
+      { key: "Mouse Drag", action: "Look around in 3D" },
+      { key: "Space / J / Z", action: "Attack Strike (when target ring glows)" },
+      { key: "K / X", action: "Raise Shield / Block enemy bursts" },
+      { key: "Escape", action: "Leave dungeon / Return to Keep Menu" },
+      { key: "F11 / Alt + Enter", action: "Toggle Fullscreen mode" }
+    ],
+    features: [
+      "True First-Person Raycaster 3D corridor dungeon crawling",
+      "6-direction movement (Walk, Retreat, Strafe & Turn)",
+      "Mouse & touch drag look-around with pointer lock option",
+      "Rhythmic Sword & Shield combat with animated in-hand weapons",
+      "15 Escaping labyrinth levels plus challenging Endless Run",
+      "Armory upgrades, 11-beast Bestiary, Relic shelf & trophies"
+    ],
+    saveSupported: true,
+    saveType: "Armory loadout, coins, unlocked levels, bestiary records & trophies"
   }
 ];
 

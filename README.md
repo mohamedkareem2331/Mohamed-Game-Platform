@@ -60,6 +60,17 @@ Welcome to **MOHAMED KAREEM GAMES**, an independent personal gaming platform des
   * Armory loadout upgrades, 11-monster Bestiary, Relic shelf, and Hearth Cat.
 * **Windows PC Executable:** `builds/HollowKeep-v1.0.exe` (11.5 MB)
 
+### 6. Hollow Keep: Version 2
+* **Category:** First-Person 3D Raycaster RPG
+* **Technology:** 3D Canvas Raycaster + PyInstaller Desktop Bundle
+* **Features:**
+  * True 3D first-person perspective with living stone corridors, torch lighting, and billboard enemies.
+  * 6-direction spatial controls (Walk forward, Walk back, Strafe left/right, Turn left/right).
+  * Mouse and touch look-around controls with pointer-lock immersion.
+  * Visceral first-person animated sword strikes and shield blocks against enemy telegraph tells.
+  * 15 escalating keep floors, Endless Run mode, Armory, Bestiary, and trophies.
+* **Windows PC Executable:** `builds/HollowKeep-v2.0.exe` (11.5 MB)
+
 ---
 
 ## 🚀 How to Launch Locally

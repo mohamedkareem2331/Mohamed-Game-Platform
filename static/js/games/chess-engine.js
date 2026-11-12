@@ -314,7 +314,7 @@ class ChessGame {
       return move.end[1] === 6 ? "O-O" : "O-O-O";
     }
     const cap = captured || move.en_passant ? "x" : "-";
-    let text = `${kind !== "P" ? kind : ""}${FILES[move.start[1]]}${move.start[0] + 1}${cap}${FILES[move.end[1]]}${move.end[0] + 1}`;
+    let text = `${kind !== "P" ? kind : ""}${FILES[move.start[1]]}${8 - move.start[0]}${cap}${FILES[move.end[1]]}${8 - move.end[0]}`;
     if (move.promotion) text += `=${move.promotion}`;
     return text;
   }

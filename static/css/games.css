@@ -226,3 +226,112 @@
     min-height: 400px;
   }
 }
+
+/* ==========================================================================
+   FULLSCREEN ARCADE CABINET RESPONSIVE SYSTEM (ALL GAMES)
+   ========================================================================== */
+
+.arcade-cabinet:fullscreen,
+.arcade-cabinet:-webkit-full-screen {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  background: #000 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+.arcade-cabinet:fullscreen .cabinet-hud-header,
+.arcade-cabinet:-webkit-full-screen .cabinet-hud-header {
+  padding: 0.6rem 2.2rem !important;
+  background: #090d1a !important;
+  flex-shrink: 0 !important;
+  z-index: 20 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  justify-content: space-between !important;
+}
+
+.arcade-cabinet:fullscreen .game-canvas-wrapper,
+.arcade-cabinet:fullscreen .game-cabinet-wrapper,
+.arcade-cabinet:fullscreen .chess-arena-shell,
+.arcade-cabinet:fullscreen .cabinet-screen-area,
+.arcade-cabinet:-webkit-full-screen .game-canvas-wrapper,
+.arcade-cabinet:-webkit-full-screen .game-cabinet-wrapper,
+.arcade-cabinet:-webkit-full-screen .chess-arena-shell,
+.arcade-cabinet:-webkit-full-screen .cabinet-screen-area {
+  flex: 1 1 0% !important;
+  height: calc(100vh - 58px) !important;
+  max-height: calc(100vh - 58px) !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-height: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: #000 !important;
+  overflow: hidden !important;
+}
+
+.arcade-cabinet:fullscreen #game-canvas,
+.arcade-cabinet:-webkit-full-screen #game-canvas {
+  width: auto !important;
+  height: calc(100vh - 66px) !important;
+  max-height: calc(100vh - 66px) !important;
+  max-width: 100vw !important;
+  object-fit: contain !important;
+  margin: auto !important;
+  border-radius: 0 !important;
+}
+
+.arcade-cabinet:fullscreen .game-portrait-frame,
+.arcade-cabinet:fullscreen .game-screen-frame,
+.arcade-cabinet:-webkit-full-screen .game-portrait-frame,
+.arcade-cabinet:-webkit-full-screen .game-screen-frame {
+  width: 100vw !important;
+  height: calc(100vh - 58px) !important;
+  max-width: 100vw !important;
+  max-height: calc(100vh - 58px) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.arcade-cabinet:fullscreen .chess-arena-shell,
+.arcade-cabinet:-webkit-full-screen .chess-arena-shell {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2.5rem !important;
+  width: 100% !important;
+  height: calc(100vh - 58px) !important;
+}
+
+.arcade-cabinet:fullscreen .chess-board,
+.arcade-cabinet:-webkit-full-screen .chess-board {
+  width: min(78vh, 760px) !important;
+  height: min(78vh, 760px) !important;
+  max-width: 78vw !important;
+  max-height: 78vh !important;
+}
+
+.arcade-cabinet:fullscreen .chess-square,
+.arcade-cabinet:-webkit-full-screen .chess-square {
+  font-size: clamp(2.4rem, 4.5vh, 4rem) !important;
+}
+
+.arcade-cabinet:fullscreen .chess-side-panel,
+.arcade-cabinet:-webkit-full-screen .chess-side-panel {
+  max-height: min(80vh, 760px) !important;
+  overflow-y: auto !important;
+}

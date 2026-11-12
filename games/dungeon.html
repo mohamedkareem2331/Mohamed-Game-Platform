@@ -90,7 +90,7 @@
 
         <div class="cabinet-controls-bar">
           <button class="cabinet-btn" onclick="triggerRestart()">🔄 Restart Run</button>
-          <button class="cabinet-btn" onclick="toggleCabinetFullscreen()">⛶ Fullscreen</button>
+          <button class="cabinet-btn" id="fs-toggle-btn" onclick="toggleCabinetFullscreen()">⛶ Fullscreen</button>
           <a href="../builds/DungeonTheHollowCrown-v1.0.exe" class="cabinet-btn" download>⭳ Download .EXE</a>
         </div>
       </div>
@@ -220,6 +220,14 @@
         document.exitFullscreen();
       }
     }
+
+    document.addEventListener("fullscreenchange", () => {
+      const isFs = !!document.fullscreenElement;
+      const fsBtn = document.getElementById("fs-toggle-btn");
+      if (fsBtn) {
+        fsBtn.innerHTML = isFs ? "🗗 Exit Fullscreen" : "⛶ Fullscreen";
+      }
+    });
 
     function showToast(msg) {
       const toast = document.getElementById("game-toast");

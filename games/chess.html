@@ -37,12 +37,14 @@
       display: grid;
       grid-template-columns: repeat(8, 1fr);
       grid-template-rows: repeat(8, 1fr);
-      width: 520px;
-      height: 520px;
+      width: min(540px, 86vw);
+      height: min(540px, 86vw);
+      aspect-ratio: 1 / 1;
       border: 6px solid #2a241b;
-      border-radius: 4px;
+      border-radius: 6px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
       user-select: none;
+      position: relative;
     }
 
     .chess-square {
@@ -51,10 +53,53 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.7rem;
+      font-size: clamp(2rem, 5vw, 3rem);
       cursor: pointer;
       position: relative;
       transition: background-color 0.15s ease;
+      line-height: 1;
+    }
+
+    .chess-piece-white {
+      color: #ffffff !important;
+      text-shadow: 
+        0 1px 0 #000,
+        0 -1px 0 #000,
+        1px 0 0 #000,
+        -1px 0 0 #000,
+        1px 1px 0 #000,
+        -1px -1px 0 #000,
+        0 3px 5px rgba(0, 0, 0, 0.7);
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.7));
+    }
+
+    .chess-piece-black {
+      color: #121417 !important;
+      text-shadow: 
+        0 1px 0 rgba(255, 255, 255, 0.45),
+        0 -1px 0 rgba(255, 255, 255, 0.45),
+        1px 0 0 rgba(255, 255, 255, 0.45),
+        -1px 0 0 rgba(255, 255, 255, 0.45),
+        0 2px 4px rgba(0, 0, 0, 0.8);
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.8));
+    }
+
+    .board-coord {
+      position: absolute;
+      font-size: 0.7rem;
+      font-weight: 800;
+      font-family: 'Rajdhani', sans-serif;
+      pointer-events: none;
+      opacity: 0.75;
+      line-height: 1;
+    }
+    .rank-coord {
+      top: 3px;
+      left: 4px;
+    }
+    .file-coord {
+      bottom: 2px;
+      right: 4px;
     }
 
     .chess-square.selected {
@@ -229,7 +274,7 @@
           <button class="cabinet-btn" onclick="triggerUndo()">↩ Undo</button>
           <button class="cabinet-btn save-btn" onclick="triggerSave()">💾 Save Game</button>
           <button class="cabinet-btn" id="resume-btn" onclick="triggerResume()">📂 Resume Save</button>
-          <button class="cabinet-btn" onclick="toggleFullscreenCabinet()">⛶ Fullscreen</button>
+          <button class="cabinet-btn" id="fs-toggle-btn" onclick="toggleFullscreenCabinet()">⛶ Fullscreen</button>
         </div>
       </div>
 
@@ -408,17 +453,28 @@
             sq.classList.add("check-square");
           }
 
+          // Coordinates on board edges
+          if (c === 0) {
+            const rankLabel = document.createElement("span");
+            rankLabel.className = "board-coord rank-coord";
+            rankLabel.style.color = isLight ? darkColor : lightColor;
+            rankLabel.textContent = 8 - r;
+            sq.appendChild(rankLabel);
+          }
+          if (r === 7) {
+            const fileLabel = document.createElement("span");
+            fileLabel.className = "board-coord file-coord";
+            fileLabel.style.color = isLight ? darkColor : lightColor;
+            fileLabel.textContent = FILES[c];
+            sq.appendChild(fileLabel);
+          }
+
           const piece = game.board[r][c];
           if (piece) {
-            sq.textContent = SYMBOLS[piece] || "";
-            // Contrast styling for black vs white piece symbols
-            if (piece[0] === "b") {
-              sq.style.color = "#161616";
-              sq.style.textShadow = "0 0 2px rgba(255, 255, 255, 0.4)";
-            } else {
-              sq.style.color = isLight ? "#6b472b" : "#fffdf7";
-              sq.style.textShadow = "0 1px 3px rgba(0, 0, 0, 0.6)";
-            }
+            const pieceSpan = document.createElement("span");
+            pieceSpan.className = piece[0] === "w" ? "chess-piece-white" : "chess-piece-black";
+            pieceSpan.textContent = SYMBOLS[piece] || "";
+            sq.appendChild(pieceSpan);
           }
 
           sq.addEventListener("click", () => handleSquareClick(r, c));
@@ -610,6 +666,14 @@
         document.exitFullscreen();
       }
     }
+
+    document.addEventListener("fullscreenchange", () => {
+      const isFs = !!document.fullscreenElement;
+      const fsBtn = document.getElementById("fs-toggle-btn");
+      if (fsBtn) {
+        fsBtn.innerHTML = isFs ? "🗗 Exit Fullscreen" : "⛶ Fullscreen";
+      }
+    });
 
     function showToast(msg) {
       const toast = document.getElementById("game-toast");

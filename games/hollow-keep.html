@@ -20,15 +20,16 @@
       border-radius: 0 0 12px 12px;
       padding: 1.5rem 0;
     }
-    .game-portrait-frame {
+    .game-screen-frame {
       width: 100%;
-      max-width: 500px;
-      height: 780px;
-      border: 2px solid var(--border-glass);
-      border-radius: 20px;
+      max-width: 1100px;
+      height: 680px;
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
       background: #14121f;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 180, 84, 0.15);
       overflow: hidden;
+      display: flex;
     }
     #game-frame {
       width: 100%;
@@ -98,15 +99,15 @@
 
         <div class="cabinet-controls-bar">
           <button class="cabinet-btn" onclick="reloadGame()">🔄 Reload</button>
-          <button class="cabinet-btn" onclick="toggleCabinetFullscreen()">⛶ Fullscreen</button>
+          <button class="cabinet-btn" id="fs-toggle-btn" onclick="toggleCabinetFullscreen()">⛶ Fullscreen</button>
           <a href="../web_games/hollow_keep/index.html" target="_blank" class="cabinet-btn">↗ Popout</a>
           <a href="../builds/HollowKeep-v1.0.exe" class="cabinet-btn" download>⭳ Download .EXE</a>
         </div>
       </div>
 
-      <!-- Playable Area (Cabinet Portrait Display) -->
+      <!-- Playable Area (Cabinet Landscape Display) -->
       <div class="game-cabinet-wrapper" id="game-container">
-        <div class="game-portrait-frame">
+        <div class="game-screen-frame">
           <iframe 
             id="game-frame" 
             src="../web_games/hollow_keep/index.html" 
@@ -210,6 +211,14 @@
         document.exitFullscreen();
       }
     }
+
+    document.addEventListener("fullscreenchange", () => {
+      const isFs = !!document.fullscreenElement;
+      const fsBtn = document.getElementById("fs-toggle-btn");
+      if (fsBtn) {
+        fsBtn.innerHTML = isFs ? "🗗 Exit Fullscreen" : "⛶ Fullscreen";
+      }
+    });
 
     function showToast(msg) {
       const toast = document.getElementById("game-toast");

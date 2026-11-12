@@ -19,10 +19,10 @@ def main():
     window = webview.create_window(
         title="Hollow Keep — Mohamed Kareem Games",
         html=html_content,
-        width=540,
-        height=880,
+        width=1150,
+        height=750,
         resizable=True,
-        min_size=(440, 680)
+        min_size=(800, 560)
     )
     webview.start()
 
